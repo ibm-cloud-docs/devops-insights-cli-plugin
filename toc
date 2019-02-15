@@ -1,0 +1,7 @@
+{:navgroup: .navgroup}
+{:topicgroup: .topicgroup}
+
+{: .toc subcollection="devops-insights-cli-plugin" audience="cli" href="/docs/devops-insights-cli-plugin/devops-insights-cli.html", path="devops-insights-cli-plugin"} 
+IBM Cloud DevOps Insights CLI
+
+    devops-insights-cli.md
