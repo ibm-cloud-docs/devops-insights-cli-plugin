@@ -17,13 +17,16 @@ keywords: doi
 {:important: .important}
 {:pre: .pre}
 
-# DevOps Insights CLI
-{: #devopsinsightscli}
+# {{site.data.keyword.DRA_short}} CLI
+{: #CLI_devops-insights}
 
-The IBM Cloud DevOps Insights CLI provides a set of commands that can be used to integrate your build with DevOps Insights. 
+The {{site.data.keyword.DRA_full}} CLI provides a set of commands that can be used to integrate your build with {{site.data.keyword.DRA_short}} (doi). 
+{:shortdesc}
+
 
 ## Prerequisites
 {: #prerequisites}
+
 * Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI. See [Download {{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg)](http://plugins.ng.bluemix.net/ui/home.html){: new_window} for instructions.
 
 * Adding the {{site.data.keyword.Bluemix_notm}} CLI plug-in
@@ -53,8 +56,23 @@ ibmcloud plugin install doi
     </tbody> 
  </table> 
 
+
+## login
+{: #login}
+
+Use this command to log in to {{site.data.keyword.Bluemix_notm}}. 
+
+```
+cloud-cli login [userID] [pw]
+```
+
+
+## Commands
 {: #commands}
-**You can specify one of the following commands**:
+
+There are two different commands that you must use.  
+
+1. 
 <table summary="CLI usage commands">
     <thead>
         <th colspan="5">CLI usage commands</th>
@@ -69,6 +87,7 @@ ibmcloud plugin install doi
     </tbody> 
  </table> 
 
+2. 
 <table summary="CLI commands to integrate with DevOps Insights">
     <thead>
         <th colspan="5">CLI commands to integrate with DevOps Insights</th>
@@ -89,21 +108,19 @@ ibmcloud plugin install doi
     </tbody> 
  </table> 
 
+
 ## CLI usage commands
+{: #CLI-usage-commands}
 
 ### ibmcloud doi help
-{: #help}
-
+{: #ibmcloud-help}
  This command displays the list of doi commands
-
 ```
  ibmcloud doi help
 ```
----
 
 ### ibmcloud doi command help
-{: #detailhelp}
-
+{: #ibmcloud-command-help}
  This command displays the details of flags needed for a given command
 ```
  ibmcloud doi <command> help
@@ -111,6 +128,7 @@ ibmcloud plugin install doi
 
 
 ## CLI commands to integrate with DevOps Insights
+{: #CLI-command-integrate-insights}
 
 ### ibmcloud doi publishbuildrecord
 {: #publishbuildrecord}
@@ -144,8 +162,6 @@ or
 ibmcloud doi publishbuildrecord  --branch master --repositoryurl "https://github.com/oic/dlms.git" --commitid dff7884b9168168d91cb9e5aec78e93db0fa80d9 --status pass
 ```
 
-----
-
 ### ibmcloud doi publishtestrecord
 {: #publishtestrecord}
 
@@ -178,11 +194,8 @@ or
 ibmcloud doi publishtestrecord --filelocation "tests/fvt/*.json" --type fvt
 ```
 
-----
-
 ### ibmcloud doi publishdeployrecord
 {: #publishdeployrecord}
-
  This command publishes a deploy record to DevOps Insights
 
 ```
@@ -210,14 +223,10 @@ or
 ibmcloud doi publishdeployrecord --env "staging" --status pass --joburl "https://app.staging.example.com"
 ```
 
-----
-
 
 ### ibmcloud doi evaluategate
 {: #evaluategate}
-
  This command evaluates a DevOps Insights gate
-
 ```
  ibmcloud doi evaluategate --policy POLICY [--forcedecision] [--ruletype RULETYPE]
 ```
