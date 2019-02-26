@@ -136,7 +136,7 @@ There are two different commands that you must use.
  This command publishes a build record to DevOps Insights
 
 ```
- ibmcloud doi publishbuildrecord --branch BRANCH --repositoryurl REPOSITORYURL --commitid COMMITID --status STATUS [--joburl JOBURL]
+ ibmcloud doi publishbuildrecord --branch BRANCH --repositoryurl REPOSITORYURL --commitid COMMITID --status STATUS [--joburl JOBURL] [--buildnumber BUILDNUMBER]
 ```
 
 **Prerequisites**: [Prerequisites](#prerequisites), ibmcloud login
@@ -153,6 +153,8 @@ There are two different commands that you must use.
    <dd>Required, The build status. Acceptable values: pass/fail.</dd>
    <dt>-J, --joburl</dt>
    <dd>Optional, The url to the job's build logs.</dd>
+   <dt>-N, --buildnumber</dt>
+   <dd>Optional, Any string that identifies the build. This option overrides the value provided by BUILD_NUMBER environment variable.</dd>
 </dl>
 
 **Example**:
@@ -168,7 +170,7 @@ ibmcloud doi publishbuildrecord  --branch master --repositoryurl "https://github
  This command publishes a test record to DevOps Insights
 
 ```
- ibmcloud doi publishtestrecord --filelocation FILELOCATION --type TYPE [--drilldownurl DRILLDOWNURL] [--env ENV] [--sqtoken SONARQUBE_TOKEN]
+ ibmcloud doi publishtestrecord --filelocation FILELOCATION --type TYPE [--drilldownurl DRILLDOWNURL] [--env ENV] [--sqtoken SONARQUBE_TOKEN] [--buildnumber BUILDNUMBER]
 ```
 
 **Prerequisites**: [Prerequisites](#prerequisites), ibmcloud login
@@ -185,6 +187,8 @@ ibmcloud doi publishbuildrecord  --branch master --repositoryurl "https://github
    <dd>Optional, The environment name to associate with the test results. This option is ignored for unit tests, code coverage tests, and static security scans.</dd>
    <dt>-K, --sqtoken</dt>
    <dd>Optional, This is a SonarQube token. This flag is valid only if the type specified is sonarqube. It is used by the CLI to pull additional information from the SonarQube server.</dd>
+   <dt>-N, --buildnumber</dt>
+   <dd>Optional, Any string that identifies the build. This option overrides the value provided by BUILD_NUMBER environment variable.</dd>
 </dl>
 
 **Example**:
@@ -199,7 +203,7 @@ ibmcloud doi publishtestrecord --filelocation "tests/fvt/*.json" --type fvt
  This command publishes a deploy record to DevOps Insights
 
 ```
- ibmcloud doi publishdeployrecord --env ENV --status STATUS --joburl JOBURL [--appurl APPURL]
+ ibmcloud doi publishdeployrecord --env ENV --status STATUS --joburl JOBURL [--appurl APPURL] [--buildnumber BUILDNUMBER]
 ```
 
 **Prerequisites**: [Prerequisites](#prerequisites), ibmcloud login
@@ -214,6 +218,8 @@ ibmcloud doi publishtestrecord --filelocation "tests/fvt/*.json" --type fvt
    <dd>Required, The URL to the job's deployment logs.</dd>
    <dt>-A, --appurl</dt>
    <dd>Optional, The URL where the deployed app is running.</dd>
+   <dt>-N, --buildnumber</dt>
+   <dd>Optional, Any string that identifies the build. This option overrides the value provided by BUILD_NUMBER environment variable.</dd>
 </dl>
 
 **Example**:
@@ -228,7 +234,7 @@ ibmcloud doi publishdeployrecord --env "staging" --status pass --joburl "https:/
 {: #evaluategate}
  This command evaluates a DevOps Insights gate
 ```
- ibmcloud doi evaluategate --policy POLICY [--forcedecision] [--ruletype RULETYPE]
+ ibmcloud doi evaluategate --policy POLICY [--forcedecision] [--ruletype RULETYPE] [--buildnumber BUILDNUMBER]
 ```
 
 **Prerequisites**: [Prerequisites](#prerequisites), ibmcloud login
@@ -241,6 +247,8 @@ ibmcloud doi publishdeployrecord --env "staging" --status pass --joburl "https:/
    <dd>Optional, Set the value to true to cause the process to exit with an error code, if the policy evaluation fails. The value defaults to false if this option is not specified.</dd>
    <dt>-E, --ruletype</dt>
    <dd>Optional, A rule type to consider. If you include this option, only rules of this type are considered in the decision-making process. The value can be code for code coverage, unittest for unit tests, fvt for FVT tests, staticsecurityscan for static security scans, dynamicsecurityscan for dynamic app scans, and sonarqube for SonarQube scans.</dd>
+   <dt>-N, --buildnumber</dt>
+   <dd>Optional, Any string that identifies the build. This option overrides the value provided by BUILD_NUMBER environment variable.</dd>
 </dl>
 
 **Example**:
