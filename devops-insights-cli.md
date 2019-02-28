@@ -16,6 +16,7 @@ keywords: doi
 {:note: .note}
 {:important: .important}
 {:pre: .pre}
+{:table: .aria-labeledby="caption"}
 
 # {{site.data.keyword.DRA_short}} CLI
 {: #CLI_devops-insights}
@@ -39,22 +40,13 @@ ibmcloud plugin install doi
 * You should have access to a toolchain with the DevOps Insights tool configured for that toolchain. 
 
 * The following environment variables should be set.
-<table>
-    <tbody> 
-        <tr> 
-            <td>LOGICAL_APP_NAME</td> 
-            <td>The application name.</td> 
-        </tr>
-        <tr>
-            <td>TOOLCHAIN_ID</td>
-            <td>The toolchain's GUID. This can be found in the toolchain url shown in the browser.</td>
-        </tr> 
-        <tr>
-            <td>BUILD_NUMBER</td>
-            <td>Any string that uniquely identifies the build.</td>
-        </tr> 
-    </tbody> 
- </table> 
+
+| Environment Variable | Description                                                                        | 
+|----------------------|------------------------------------------------------------------------------------|
+| LOGICAL_APP_NAME     | The application name.                                                              | 
+| TOOLCHAIN_ID         | The toolchain's GUID. This can be found in the toolchain url shown in the browser. | 
+| BUILD_NUMBER         | Any string that uniquely identifies the build.                                     |
+{: caption="Table 1. Environment variables" caption-side="top"}
 
 
 ## login
