@@ -39,22 +39,14 @@ ibmcloud plugin install doi
 
 * You should have access to a toolchain with the DevOps Insights tool configured for that toolchain. 
 
-* If you are using Travis, Concourse or any CI/CD tool other than the IBM Continuous Delivery pipeline, then set the following environment variables:
+* Set the following environment variable.
 
 | Environment Variable | Description                                                                        | 
 |----------------------|------------------------------------------------------------------------------------|
-| LOGICAL_APP_NAME     | The application name.                                                              | 
 | TOOLCHAIN_ID         | The toolchain's GUID. This can be found in the toolchain url shown in the browser. | 
-| BUILD_NUMBER         | Any string that uniquely identifies the build.                                     |
 {: caption="Table 1. Environment variables" caption-side="top"}
 
-* If you are using IBM Continuous Delivery pipeline, you need to set the following environment variables:
-
-| Environment Variable | Description                                                                        | 
-|----------------------|------------------------------------------------------------------------------------|
-| LOGICAL_APP_NAME     | The application name.                                                              | 
-| BUILD_PREFIX         | Any string. For example, the Git branch name. This value gets prefixed to IBM CD pipeline build number| 
-{: caption="Table 2. Environment variables for IBM CD Pipeline" caption-side="top"}
+* If you are using IBM Continuous Delivery pipeline, you need not set the TOOLCHAIN_ID environment variable unless you want to send your build data to a different toolchain, other than the one the pipeline is in.
 
 ## login
 {: #login}
@@ -62,7 +54,7 @@ ibmcloud plugin install doi
 Use this command to log in to {{site.data.keyword.Bluemix_notm}}. 
 
 ```
-cloud-cli login [userID] [pw]
+ibmcloud login --apikey API_KEY
 ```
 
 
@@ -115,14 +107,14 @@ There are two different commands that you must use.
 {: #ibmcloud-help}
  This command displays the list of doi commands
 ```
- ibmcloud doi help
+ ibmcloud doi --help
 ```
 
 ### ibmcloud doi command help
 {: #ibmcloud-command-help}
  This command displays the details of flags needed for a given command
 ```
- ibmcloud doi <command> help
+ ibmcloud doi <command> --help
 ```
 
 
@@ -135,7 +127,7 @@ There are two different commands that you must use.
  This command publishes a build record to DevOps Insights
 
 ```
- ibmcloud doi publishbuildrecord --branch BRANCH --repositoryurl REPOSITORYURL --commitid COMMITID --status STATUS [--joburl JOBURL] [--buildnumber BUILDNUMBER] [--logicalappname LOGICALAPPNAME]
+ ibmcloud doi publishbuildrecord --branch BRANCH --repositoryurl REPOSITORYURL --commitid COMMITID --status STATUS --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER [--joburl JOBURL]
 ```
 
 **Prerequisites**: [Prerequisites](#prerequisites), ibmcloud login
@@ -150,19 +142,19 @@ There are two different commands that you must use.
    <dd>Required, The git commit id.</dd>
    <dt>-S, --status</dt>
    <dd>Required, The build status. Acceptable values: pass/fail.</dd>
+   <dt>-L, --logicalappname</dt>
+   <dd>Required, Name of the application.</dd>
+   <dt>-N, --buildnumber</dt>
+   <dd>Required, Any string that identifies the build.</dd>
    <dt>-J, --joburl</dt>
    <dd>Optional, The url to the job's build logs.</dd>
-   <dt>-N, --buildnumber</dt>
-   <dd>Optional, Any string that identifies the build. This option overrides the value provided by BUILD_NUMBER environment variable.</dd>
-   <dt>-L, --logicalappname</dt>
-   <dd>Optional, Name of the application. This option overrides the value provided by LOGICAL_APP_NAME environment variable.</dd>
 </dl>
 
 **Example**:
 ```
-ibmcloud doi publishbuildrecord  -B master -R "https://github.com/oic/dlms.git" -C dff7884b9168168d91cb9e5aec78e93db0fa80d9 -S pass
+ibmcloud doi publishbuildrecord  -B master -R "https://github.com/oic/dlms.git" -C dff7884b9168168d91cb9e5aec78e93db0fa80d9 -S pass -L testapp -N master:199
 or
-ibmcloud doi publishbuildrecord  --branch master --repositoryurl "https://github.com/oic/dlms.git" --commitid dff7884b9168168d91cb9e5aec78e93db0fa80d9 --status pass
+ibmcloud doi publishbuildrecord  --branch master --repositoryurl "https://github.com/oic/dlms.git" --commitid dff7884b9168168d91cb9e5aec78e93db0fa80d9 --status pass --logicalappname testapp --buildnumber master:199
 ```
 
 ### ibmcloud doi publishtestrecord
@@ -171,7 +163,7 @@ ibmcloud doi publishbuildrecord  --branch master --repositoryurl "https://github
  This command publishes a test record to DevOps Insights
 
 ```
- ibmcloud doi publishtestrecord --filelocation FILELOCATION --type TYPE [--drilldownurl DRILLDOWNURL] [--env ENV] [--sqtoken SONARQUBE_TOKEN] [--buildnumber BUILDNUMBER] [--logicalappname LOGICALAPPNAME]
+ ibmcloud doi publishtestrecord --filelocation FILELOCATION --type TYPE --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER [--drilldownurl DRILLDOWNURL] [--env ENV] [--sqtoken SONARQUBE_TOKEN] 
 ```
 
 **Prerequisites**: [Prerequisites](#prerequisites), ibmcloud login
@@ -182,23 +174,23 @@ ibmcloud doi publishbuildrecord  --branch master --repositoryurl "https://github
    <dd>Required, The location of the test results that you want to upload. This can be a single file, an entire directory, or multiple files that match a wildcard expression.</dd>
    <dt>-T, --type</dt>
    <dd>Required, The type of test results that you want to upload. The value can be code for code coverage, unittest for unit tests, fvt for FVT tests, staticsecurityscan for static security scans, dynamicsecurityscan for dynamic app scans, and sonarqube for SonarQube scans. In addition to these types you can also use a custom quality data set tag to upload test results of different type.</dd>
+   <dt>-L, --logicalappname</dt>
+   <dd>Required, Name of the application.</dd>
+   <dt>-N, --buildnumber</dt>
+   <dd>Required, Any string that identifies the build.</dd>
    <dt>-U, --drilldownurl</dt>
    <dd>Optional, A URL where more information about the test results can be found. If this URL is invalid, the option is ignored.</dd>
    <dt>-E, --env</dt>
    <dd>Optional, The environment name to associate with the test results. This option is ignored for unit tests, code coverage tests, and static security scans.</dd>
    <dt>-K, --sqtoken</dt>
-   <dd>Optional, This is a SonarQube token. This flag is valid only if the type specified is sonarqube. It is used by the CLI to pull additional information from the SonarQube server.</dd>
-   <dt>-N, --buildnumber</dt>
-   <dd>Optional, Any string that identifies the build. This option overrides the value provided by BUILD_NUMBER environment variable.</dd>
-   <dt>-L, --logicalappname</dt>
-   <dd>Optional, Name of the application. This option overrides the value provided by LOGICAL_APP_NAME environment variable.</dd>
+   <dd>Optional, This is a SonarQube token. This flag is valid only if the type specified is sonarqube. It is used by the CLI to pull additional information from the SonarQube server.</dd> 
 </dl>
 
 **Example**:
 ```
-ibmcloud doi publishtestrecord -F "tests/fvt/*.json" -T fvt
+ibmcloud doi publishtestrecord -F "tests/fvt/*.json" -T fvt -L testapp -N master:199
 or
-ibmcloud doi publishtestrecord --filelocation "tests/fvt/*.json" --type fvt
+ibmcloud doi publishtestrecord --filelocation "tests/fvt/*.json" --type fvt --logicalappname testapp --buildnumber master:199
 ```
 
 ### ibmcloud doi publishdeployrecord
@@ -206,7 +198,7 @@ ibmcloud doi publishtestrecord --filelocation "tests/fvt/*.json" --type fvt
  This command publishes a deploy record to DevOps Insights
 
 ```
- ibmcloud doi publishdeployrecord --env ENV --status STATUS --joburl JOBURL [--appurl APPURL] [--buildnumber BUILDNUMBER] [--logicalappname LOGICALAPPNAME]
+ ibmcloud doi publishdeployrecord --env ENV --status STATUS --joburl JOBURL --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER [--appurl APPURL] 
 ```
 
 **Prerequisites**: [Prerequisites](#prerequisites), ibmcloud login
@@ -219,19 +211,19 @@ ibmcloud doi publishtestrecord --filelocation "tests/fvt/*.json" --type fvt
    <dd>Required, The deployment status. This value must be either pass or fail.</dd>
    <dt>-J, --joburl</dt>
    <dd>Required, The URL to the job's deployment logs.</dd>
+   <dt>-L, --logicalappname</dt>
+   <dd>Required, Name of the application.</dd>
+   <dt>-N, --buildnumber</dt>
+   <dd>Required, Any string that identifies the build.</dd>
    <dt>-A, --appurl</dt>
    <dd>Optional, The URL where the deployed app is running.</dd>
-   <dt>-N, --buildnumber</dt>
-   <dd>Optional, Any string that identifies the build. This option overrides the value provided by BUILD_NUMBER environment variable.</dd>
-   <dt>-L, --logicalappname</dt>
-   <dd>Optional, Name of the application. This option overrides the value provided by LOGICAL_APP_NAME environment variable.</dd>
 </dl>
 
 **Example**:
 ```
-ibmcloud doi publishdeployrecord -E "staging" -S pass -J "https://app.staging.example.com"
+ibmcloud doi publishdeployrecord -E "staging" -S pass -J "https://app.staging.example.com" -L testapp -N master:199
 or
-ibmcloud doi publishdeployrecord --env "staging" --status pass --joburl "https://app.staging.example.com"
+ibmcloud doi publishdeployrecord --env "staging" --status pass --joburl "https://app.staging.example.com" --logicalappname testapp --buildnumber master:199
 ```
 
 
@@ -239,7 +231,7 @@ ibmcloud doi publishdeployrecord --env "staging" --status pass --joburl "https:/
 {: #evaluategate}
  This command evaluates a DevOps Insights gate
 ```
- ibmcloud doi evaluategate --policy POLICY [--forcedecision] [--ruletype RULETYPE] [--buildnumber BUILDNUMBER] [--logicalappname LOGICALAPPNAME]
+ ibmcloud doi evaluategate --policy POLICY --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER [--forcedecision] [--ruletype RULETYPE] 
 ```
 
 **Prerequisites**: [Prerequisites](#prerequisites), ibmcloud login
@@ -248,19 +240,19 @@ ibmcloud doi publishdeployrecord --env "staging" --status pass --joburl "https:/
 <dl>
    <dt>-P, --policy</dt>
    <dd>Required, The name of the policy that the gate uses to make its decision.</dd>
+   <dt>-L, --logicalappname</dt>
+   <dd>Required, Name of the application.</dd>
+   <dt>-N, --buildnumber</dt>
+   <dd>Required, Any string that identifies the build.</dd>
    <dt>-D, --forcedecision</dt>
    <dd>Optional, Set the value to true to cause the process to exit with an error code, if the policy evaluation fails. The value defaults to false if this option is not specified.</dd>
    <dt>-E, --ruletype</dt>
-   <dd>Optional, A rule type to consider. If you include this option, only rules of this type are considered in the decision-making process. The value can be code for code coverage, unittest for unit tests, fvt for FVT tests, staticsecurityscan for static security scans, dynamicsecurityscan for dynamic app scans, and sonarqube for SonarQube scans.</dd>
-   <dt>-N, --buildnumber</dt>
-   <dd>Optional, Any string that identifies the build. This option overrides the value provided by BUILD_NUMBER environment variable.</dd>
-   <dt>-L, --logicalappname</dt>
-   <dd>Optional, Name of the application. This option overrides the value provided by LOGICAL_APP_NAME environment variable.</dd>
+   <dd>Optional, A rule type to consider. If you include this option, only rules of this type are considered in the decision-making process. The value can be code for code coverage, unittest for unit tests, fvt for FVT tests, staticsecurityscan for static security scans, dynamicsecurityscan for dynamic app scans, and sonarqube for SonarQube scans.</dd>  
 </dl>
 
 **Example**:
 ```
-ibmcloud doi evaluategate -P "policyname" -D true
+ibmcloud doi evaluategate -P "policyname" -D true -L testapp -N master:199
 or
-ibmcloud doi evaluategate --policy "policyname" --forcedecision true
+ibmcloud doi evaluategate --policy "policyname" --forcedecision true --logicalappname testapp --buildnumber master:199
 ```
