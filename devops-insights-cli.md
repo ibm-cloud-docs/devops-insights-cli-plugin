@@ -51,12 +51,11 @@ ibmcloud plugin install doi
 ## login
 {: #login}
 
-Use this command to log in to {{site.data.keyword.Bluemix_notm}}. 
+Use this command to log in to {{site.data.keyword.Bluemix_notm}}. The API_KEY must have access to the toolchain.
 
 ```
 ibmcloud login --apikey API_KEY
 ```
-
 
 ## Commands
 {: #commands}
@@ -121,6 +120,11 @@ There are two different commands that you must use.
 ## CLI commands to integrate with DevOps Insights
 {: #CLI-command-integrate-insights}
 
+**Points to remember while using the CLI:**
+1. For a given build it is required to publish a [build record](#publishbuildrecord)
+
+2. For a given build the value of logicalappname and buildnumber parameter, passed to the CLI, should be same across all the command invocations.
+
 ### ibmcloud doi publishbuildrecord
 {: #publishbuildrecord}
 
@@ -147,7 +151,7 @@ There are two different commands that you must use.
    <dt>-N, --buildnumber</dt>
    <dd>Required, Any string that identifies the build.</dd>
    <dt>-J, --joburl</dt>
-   <dd>Optional, The url to the job's build logs.</dd>
+   <dd>Optional, The url to the job's build logs. This value is automatically set by the CLI in IBM Continuous Delivery pipeline.</dd>
 </dl>
 
 **Example**:
@@ -173,7 +177,7 @@ ibmcloud doi publishbuildrecord  --branch master --repositoryurl "https://github
    <dt>-F, --filelocation</dt>
    <dd>Required, The location of the test results that you want to upload. This can be a single file, an entire directory, or multiple files that match a wildcard expression.</dd>
    <dt>-T, --type</dt>
-   <dd>Required, The type of test results that you want to upload. The value can be code for code coverage, unittest for unit tests, fvt for FVT tests, staticsecurityscan for static security scans, dynamicsecurityscan for dynamic app scans, and sonarqube for SonarQube scans. In addition to these types you can also use a custom quality data set tag to upload test results of different type.</dd>
+   <dd>Required, The type of test results that you want to upload. The value can be code for code coverage, **unittest** for unit tests, **fvt** for FVT tests, **staticsecurityscan** for static security scans, **dynamicsecurityscan** for dynamic app scans, and **sonarqube** for SonarQube scans. In addition to these types you can also use a custom quality data set tag to upload test results of different type.</dd>
    <dt>-L, --logicalappname</dt>
    <dd>Required, Name of the application.</dd>
    <dt>-N, --buildnumber</dt>
@@ -198,7 +202,7 @@ ibmcloud doi publishtestrecord --filelocation "tests/fvt/*.json" --type fvt --lo
  This command publishes a deploy record to DevOps Insights
 
 ```
- ibmcloud doi publishdeployrecord --env ENV --status STATUS --joburl JOBURL --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER [--appurl APPURL] 
+ ibmcloud doi publishdeployrecord --env ENV --status STATUS --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER [--joburl JOBURL] [--appurl APPURL] 
 ```
 
 **Prerequisites**: [Prerequisites](#prerequisites), ibmcloud login
@@ -208,22 +212,22 @@ ibmcloud doi publishtestrecord --filelocation "tests/fvt/*.json" --type fvt --lo
    <dt>-E, --env</dt>
    <dd>Required, The environment where the pipeline job deployed the app.</dd>
    <dt>-S, --status</dt>
-   <dd>Required, The deployment status. This value must be either pass or fail.</dd>
-   <dt>-J, --joburl</dt>
-   <dd>Required, The URL to the job's deployment logs.</dd>
+   <dd>Required, The deployment status. This value must be either pass or fail.</dd>  
    <dt>-L, --logicalappname</dt>
    <dd>Required, Name of the application.</dd>
    <dt>-N, --buildnumber</dt>
    <dd>Required, Any string that identifies the build.</dd>
+   <dt>-J, --joburl</dt>
+   <dd>Optional, The URL to the job's deployment logs. This value is automatically set by the CLI in IBM Continuous Delivery pipeline.</dd>
    <dt>-A, --appurl</dt>
    <dd>Optional, The URL where the deployed app is running.</dd>
 </dl>
 
 **Example**:
 ```
-ibmcloud doi publishdeployrecord -E "staging" -S pass -J "https://app.staging.example.com" -L testapp -N master:199
+ibmcloud doi publishdeployrecord -E "staging" -S pass -L testapp -N master:199
 or
-ibmcloud doi publishdeployrecord --env "staging" --status pass --joburl "https://app.staging.example.com" --logicalappname testapp --buildnumber master:199
+ibmcloud doi publishdeployrecord --env "staging" --status pass --logicalappname testapp --buildnumber master:199
 ```
 
 
