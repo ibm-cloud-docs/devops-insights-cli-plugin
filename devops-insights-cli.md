@@ -177,7 +177,7 @@ ibmcloud doi publishbuildrecord  --branch master --repositoryurl "https://github
    <dt>-F, --filelocation</dt>
    <dd>Required, The location of the test results that you want to upload. This can be a single file, an entire directory, or multiple files that match a wildcard expression.</dd>
    <dt>-T, --type</dt>
-   <dd>Required, The type of test results that you want to upload. The value can be code for code coverage, **unittest** for unit tests, **fvt** for FVT tests, **staticsecurityscan** for static security scans, **dynamicsecurityscan** for dynamic app scans, and **sonarqube** for SonarQube scans. In addition to these types you can also use a custom quality data set tag to upload test results of different type.</dd>
+   <dd>Required, The type of test results that you want to upload. The value can be code for code coverage, **unittest** for unit tests, **fvt** for FVT tests, **staticsecurityscan** for static security scans, **dynamicsecurityscan** for dynamic app scans, **sonarqube** for SonarQube scans, and **vulnerabilityadvisor** for Vulnerability Advisor scans. In addition to these types you can also use a custom quality data set tag to upload test results of different type.</dd>
    <dt>-L, --logicalappname</dt>
    <dd>Required, Name of the application.</dd>
    <dt>-N, --buildnumber</dt>
@@ -251,7 +251,7 @@ ibmcloud doi publishdeployrecord --env "staging" --status pass --logicalappname 
    <dt>-D, --forcedecision</dt>
    <dd>Optional, Set the value to true to cause the process to exit with an error code, if the policy evaluation fails. The value defaults to false if this option is not specified.</dd>
    <dt>-E, --ruletype</dt>
-   <dd>Optional, A rule type to consider. If you include this option, only rules of this type are considered in the decision-making process. The value can be code for code coverage, unittest for unit tests, fvt for FVT tests, staticsecurityscan for static security scans, dynamicsecurityscan for dynamic app scans, and sonarqube for SonarQube scans.</dd>  
+   <dd>Optional, A rule type to consider. If you include this option, only rules of this type are considered in the decision-making process. The value can be code for code coverage, unittest for unit tests, fvt for FVT tests, staticsecurityscan for static security scans, dynamicsecurityscan for dynamic app scans, sonarqube for SonarQube scans, and vulnerabilityadvisor for Vulnerability Advisor scans.</dd>  
 </dl>
 
 **Example**:
