@@ -2,9 +2,9 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-02-28"
+lastupdated: "2019-05-10"
 
-keywords: doi
+keywords: doi, devops insights, cli, plug-in
 
 ---
 
@@ -120,10 +120,7 @@ There are two different commands that you must use.
 ## CLI commands to integrate with DevOps Insights
 {: #CLI-command-integrate-insights}
 
-**Points to remember while using the CLI:**
-1. For a given build it is required to publish a [build record](#publishbuildrecord)
-
-2. For a given build the value of logicalappname and buildnumber parameter, passed to the CLI, should be same across all the command invocations.
+When you use the CLI for a given build, it is required to publish a [build record](#publishbuildrecord). Also, for a given build, the value of `logicalappname` and `buildnumber` parameter passed to the CLI should be same across all the command invocations.
 
 ### ibmcloud doi publishbuildrecord
 {: #publishbuildrecord}
