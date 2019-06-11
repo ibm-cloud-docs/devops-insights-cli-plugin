@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-05-10"
+lastupdated: "2019-06-11"
 
 keywords: doi, devops insights, cli, plug-in
 
@@ -39,14 +39,7 @@ ibmcloud plugin install doi
 
 * You should have access to a toolchain with the DevOps Insights tool configured for that toolchain. 
 
-* Set the following environment variable.
-
-| Environment Variable | Description                                                                        | 
-|----------------------|------------------------------------------------------------------------------------|
-| TOOLCHAIN_ID         | The toolchain's GUID. This can be found in the toolchain url shown in the browser. | 
-{: caption="Table 1. Environment variables" caption-side="top"}
-
-* If you are using IBM Continuous Delivery pipeline, you need not set the TOOLCHAIN_ID environment variable unless you want to send your build data to a different toolchain, other than the one the pipeline is in.
+Set `TOOLCHAIN_ID` as the environment variable. This is the toolchain's GUID. This can be found in the toolchain url shown in the browser. If you are using IBM Continuous Delivery pipeline, you need not set the `TOOLCHAIN_ID` environment variable unless you want to send your build data to a different toolchain, other than the one the pipeline is in.
 
 ## login
 {: #login}
@@ -62,41 +55,14 @@ ibmcloud login --apikey API_KEY
 
 There are two different commands that you must use.  
 
-1. 
-<table summary="CLI usage commands">
-    <thead>
-        <th colspan="5">CLI usage commands</th>
-    </thead>
-    <tbody>
-        <tr> 
-            <td>[ibmcloud doi help](#help)</td> 
-        </tr> 
-        <tr> 
-            <td>[ibmcloud doi command help](#detailhelp)</td> 
-        </tr>
-    </tbody> 
- </table> 
-
-2. 
-<table summary="CLI commands to integrate with DevOps Insights">
-    <thead>
-        <th colspan="5">CLI commands to integrate with DevOps Insights</th>
-    </thead>
-    <tbody>
-        <tr> 
-            <td>[ibmcloud doi publishbuildrecord](#publishbuildrecord)</td> 
-        </tr>
-        <tr>
-            <td>[ibmcloud doi publishtestrecord](#publishtestrecord)</td> 
-        </tr>
-        <tr>
-            <td>[ibmcloud doi publishdeployrecord](#publishdeployrecord)</td>
-        </tr>
-        <tr>
-            <td>[ibmcloud doi evaluategate](#evaluategate)</td>
-        </tr> 
-    </tbody> 
- </table> 
+1. **CLI usage commands**
+  * [ibmcloud doi help](#help)
+  * [ibmcloud doi command help](#detailhelp)
+2. **CLI commands to integrate with DevOps Insights**
+  * [ibmcloud doi publishbuildrecord](#publishbuildrecord) 
+  * [ibmcloud doi publishtestrecord](#publishtestrecord) 
+  * [ibmcloud doi publishdeployrecord](#publishdeployrecord)
+  * [ibmcloud doi evaluategate](#evaluategate)
 
 
 ## CLI usage commands
