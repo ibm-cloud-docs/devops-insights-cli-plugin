@@ -39,7 +39,7 @@ ibmcloud plugin install doi
 
 * You should have access to a toolchain with the DevOps Insights tool configured for that toolchain. 
 
-Set `TOOLCHAIN_ID` as the environment variable. This is the toolchain's GUID. This can be found in the toolchain url shown in the browser. If you are using IBM Continuous Delivery pipeline, you need not set the `TOOLCHAIN_ID` environment variable unless you want to send your build data to a different toolchain, other than the one the pipeline is in.
+* Set `TOOLCHAIN_ID` as the environment variable. This is the toolchain's GUID. This can be found in the toolchain url shown in the browser. If you are using IBM Continuous Delivery pipeline, you need not set the `TOOLCHAIN_ID` environment variable unless you want to send your build data to a different toolchain, other than the one the pipeline is in.
 
 ## login
 {: #login}
