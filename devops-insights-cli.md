@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-06-13"
 
 keywords: doi, devops insights, cli, plug-in
 
@@ -32,16 +32,16 @@ The {{site.data.keyword.DRA_full}} CLI provides a set of commands that can be us
 
 * Adding the {{site.data.keyword.Bluemix_notm}} CLI plug-in
 
-To install the IBM Cloud DevOps Insights CLI plugin, run the following command:
+To install the {{site.data.keyword.DRA_full}} CLI plug-in, run the following command:
 ```
 ibmcloud plugin install doi
 ```
 
-* You should have access to a toolchain with the DevOps Insights tool configured for that toolchain. 
+* You have access to a toolchain with the {{site.data.keyword.DRA_short}} tool configured for that toolchain. 
 
-* Set `TOOLCHAIN_ID` as the environment variable. This is the toolchain's GUID. This can be found in the toolchain url shown in the browser. If you are using IBM Continuous Delivery pipeline, you need not set the `TOOLCHAIN_ID` environment variable unless you want to send your build data to a different toolchain, other than the one the pipeline is in.
+* Set `TOOLCHAIN_ID` as the environment variable to make it the toolchain's GUID. The toolchain ID is found in the toolchain url that is shown in the browser. If you're using {{site.data.keyword.deliverypipelinelong}}, you set the `TOOLCHAIN_ID` environment variable to send your build data to a different toolchain. For more information, see [Aggregating data from multiple sources into a single toolchain](/docs/services/DevOpsInsights?topic=DevOpsInsights-aggregating-multiple-sources).
 
-## login
+## Login
 {: #login}
 
 Use this command to log in to {{site.data.keyword.Bluemix_notm}}. The API_KEY must have access to the toolchain.
@@ -77,7 +77,7 @@ There are two different commands that you must use.
 
 ### ibmcloud doi command help
 {: #ibmcloud-command-help}
- This command displays the details of flags needed for a given command
+ The following command displays the details of flags that are needed for a command:
 ```
  ibmcloud doi <command> --help
 ```
@@ -86,7 +86,7 @@ There are two different commands that you must use.
 ## CLI commands to integrate with DevOps Insights
 {: #CLI-command-integrate-insights}
 
-When you use the CLI for a given build, it is required to publish a [build record](#publishbuildrecord). Also, for a given build, the value of `logicalappname` and `buildnumber` parameter passed to the CLI should be same across all the command invocations.
+When you use the CLI for a build, it's required to publish a [build record](#publishbuildrecord). Also, the value of `logicalappname` and `buildnumber` parameter that is passed to the CLI should be same across all the command invocations.
 
 ### ibmcloud doi publishbuildrecord
 {: #publishbuildrecord}
@@ -104,9 +104,9 @@ When you use the CLI for a given build, it is required to publish a [build recor
    <dt>-B, --branch</dt>
    <dd>Required, The repository branch on which the build is being performed.</dd>
    <dt>-R, --repositoryurl</dt>
-   <dd>Required, The url of the git repository.</dd>
+   <dd>Required, The url of the Git repository.</dd>
    <dt>-C, --commitid</dt>
-   <dd>Required, The git commit id.</dd>
+   <dd>Required, The Git commit ID.</dd>
    <dt>-S, --status</dt>
    <dd>Required, The build status. Acceptable values: pass/fail.</dd>
    <dt>-L, --logicalappname</dt>
@@ -138,9 +138,9 @@ ibmcloud doi publishbuildrecord  --branch master --repositoryurl "https://github
 **Command Options**:
 <dl>
    <dt>-F, --filelocation</dt>
-   <dd>Required, The location of the test results that you want to upload. This can be a single file, an entire directory, or multiple files that match a wildcard expression.</dd>
+   <dd>Required, The location of the test results that you want to upload. It can be a single file, an entire directory, or multiple files that match a wildcard expression.</dd>
    <dt>-T, --type</dt>
-   <dd>Required, The type of test results that you want to upload. The value can be code for code coverage, **unittest** for unit tests, **fvt** for FVT tests, **staticsecurityscan** for static security scans, **dynamicsecurityscan** for dynamic app scans, **sonarqube** for SonarQube scans, and **vulnerabilityadvisor** for Vulnerability Advisor scans. In addition to these types you can also use a custom quality data set tag to upload test results of different type.</dd>
+   <dd>Required, The type of test results that you want to upload. The value can be code for code coverage, **unittest** for unit tests, **fvt** for FVT tests, **staticsecurityscan** for static security scans, **dynamicsecurityscan** for dynamic app scans, **sonarqube** for SonarQube scans, and **vulnerabilityadvisor** for Vulnerability Advisor scans. In addition to these types, you can also use a custom quality data set tag to upload test results of different type.</dd>
    <dt>-L, --logicalappname</dt>
    <dd>Required, Name of the application.</dd>
    <dt>-N, --buildnumber</dt>
@@ -162,7 +162,7 @@ ibmcloud doi publishtestrecord --filelocation "tests/fvt/*.json" --type fvt --lo
 
 ### ibmcloud doi publishdeployrecord
 {: #publishdeployrecord}
- This command publishes a deploy record to DevOps Insights
+ This command publishes a deployment record to DevOps Insights
 
 ```
  ibmcloud doi publishdeployrecord --env ENV --status STATUS --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER [--joburl JOBURL] [--appurl APPURL] 
