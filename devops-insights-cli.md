@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-06-13"
+lastupdated: "2019-08-08"
 
 keywords: doi, devops insights, cli, plug-in
 
@@ -21,25 +21,25 @@ keywords: doi, devops insights, cli, plug-in
 # {{site.data.keyword.DRA_short}} CLI
 {: #CLI_devops-insights}
 
-The {{site.data.keyword.DRA_full}} CLI provides a set of commands that can be used to integrate your build with {{site.data.keyword.DRA_short}} (doi). 
+The {{site.data.keyword.DRA_full}} CLI provides a set of commands that can be used to integrate your build with {{site.data.keyword.DRA_short}} (doi). There are two different commands that you must use: CLI usage commands and CLI commands to integrate with {{site.data.keyword.DRA_short}}.
 {:shortdesc}
 
 
-## Prerequisites
+## Before you begin
 {: #prerequisites}
 
-* Before you begin, install the {{site.data.keyword.Bluemix_notm}} CLI. See [Download {{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg)](http://plugins.ng.bluemix.net/ui/home.html){: new_window} for instructions.
+* Install the {{site.data.keyword.Bluemix_notm}} CLI. See [Download {{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg)](http://plugins.ng.bluemix.net/ui/home.html){: new_window} for instructions.
 
-* Adding the {{site.data.keyword.Bluemix_notm}} CLI plug-in
+* Add the {{site.data.keyword.Bluemix_notm}} CLI plug-in. Run the following command:
 
-To install the {{site.data.keyword.DRA_full}} CLI plug-in, run the following command:
 ```
 ibmcloud plugin install doi
 ```
 
-* You have access to a toolchain with the {{site.data.keyword.DRA_short}} tool configured for that toolchain. 
+* Access to a toolchain with the {{site.data.keyword.DRA_short}} tool configured for that toolchain. For more information about toolchains, see [Creating a toolchain from an app](/docs/services/ContinuousDelivery?topic=ContinuousDelivery-toolchains_getting_started#creating_a_toolchain_from_an_app).  
 
-* Set `TOOLCHAIN_ID` as the environment variable to make it the toolchain's GUID. The toolchain ID is found in the toolchain url that is shown in the browser. If you're using {{site.data.keyword.deliverypipelinelong}}, you set the `TOOLCHAIN_ID` environment variable to send your build data to a different toolchain. For more information, see [Aggregating data from multiple sources into a single toolchain](/docs/services/DevOpsInsights?topic=DevOpsInsights-aggregating-multiple-sources).
+* Set the `TOOLCHAIN_ID` as the environment variable to make it the toolchain's GUID. The toolchain ID is found in the toolchain URL that is shown in the browser. If you're using {{site.data.keyword.deliverypipelinelong}}, you set the `TOOLCHAIN_ID` environment variable to send your build data to a different toolchain. For more information, see [Aggregating data from multiple sources into a single toolchain](/docs/services/DevOpsInsights?topic=DevOpsInsights-aggregating-multiple-sources).
+
 
 ## Login
 {: #login}
@@ -50,56 +50,58 @@ Use this command to log in to {{site.data.keyword.Bluemix_notm}}. The API_KEY mu
 ibmcloud login --apikey API_KEY
 ```
 
-## Commands
-{: #commands}
-
-There are two different commands that you must use.  
-
-1. **CLI usage commands**
-  * [ibmcloud doi help](#help)
-  * [ibmcloud doi command help](#detailhelp)
-2. **CLI commands to integrate with DevOps Insights**
-  * [ibmcloud doi publishbuildrecord](#publishbuildrecord) 
-  * [ibmcloud doi publishtestrecord](#publishtestrecord) 
-  * [ibmcloud doi publishdeployrecord](#publishdeployrecord)
-  * [ibmcloud doi evaluategate](#evaluategate)
-
-
 ## CLI usage commands
 {: #CLI-usage-commands}
 
-### ibmcloud doi help
+### {{site.data.keyword.DRA_short}} help
 {: #ibmcloud-help}
- This command displays the list of doi commands
+
+ The following command displays the list of {{site.data.keyword.DRA_short}} commands:
+
 ```
  ibmcloud doi --help
 ```
 
-### ibmcloud doi command help
+### {{site.data.keyword.DRA_short}} command help
 {: #ibmcloud-command-help}
+
  The following command displays the details of flags that are needed for a command:
+
 ```
  ibmcloud doi <command> --help
 ```
 
 
-## CLI commands to integrate with DevOps Insights
-{: #CLI-command-integrate-insights}
+## Commands to integrate with {{site.data.keyword.DRA_short}}
+{: #commands-integrate-insights}
 
-When you use the CLI for a build, it's required to publish a [build record](#publishbuildrecord). Also, the value of `logicalappname` and `buildnumber` parameter that is passed to the CLI should be same across all the command invocations.
+When you use the CLI for a build, you must publish a [build record](#publishbuildrecord). 
 
-### ibmcloud doi publishbuildrecord
+The value of `logicalappname` and `buildnumber` parameter that is passed to the CLI need to remain the same across all the command invocations.
+
+### Publishing a build record
 {: #publishbuildrecord}
 
- This command publishes a build record to DevOps Insights
+ The following command publishes a build record to {{site.data.keyword.DRA_short}}:
 
 ```
  ibmcloud doi publishbuildrecord --branch BRANCH --repositoryurl REPOSITORYURL --commitid COMMITID --status STATUS --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER [--joburl JOBURL]
 ```
 
-**Prerequisites**: [Prerequisites](#prerequisites), ibmcloud login
+The following are the command options for publishing a build record. 
 
-**Command Options**:
+| Command Options                       | Required or Optional | Description                                                                                                             |
+|---------------------------------------|----------------------|-------------------------------------------------------------------------------------------------------------------------|
+| <nobr>`-B`, `--branch`</nobr>         | Required             | The repository branch that the build is being performed.                                                                | 
+| <nobr>`-R`, `--repositoryurl`</nobr>  | Required             | The URL of the Git repository.                                                                                          |
+| <nobr>`-C`, `--commitid`</nobr>       | Required             | The Git commit ID.                                                                                                      |
+| <nobr>`-S`, `--status`</nobr>         | Required             | The build status. Acceptable values: `pass` and `fail`.                                                                 |
+| <nobr>`-L`, `--logicalappname`</nobr> | Required             | Name of the application.                                                                                                |
+| <nobr>`-N`, `--buildnumber`</nobr>    | Required             | Any string that identifies the build.                                                                                   |
+| <nobr>`-J`, `--joburl`</nobr>         | Optional             | The URL to the job's build logs that is automatically set by the CLI in the {{site.data.keyword.deliverypipelinelong}}. |
+{: caption="Table 1. Command options for publishing a build record" caption-side="top"}
+
+ <!--
 <dl>
    <dt>-B, --branch</dt>
    <dd>Required, The repository branch on which the build is being performed.</dd>
@@ -116,6 +118,7 @@ When you use the CLI for a build, it's required to publish a [build record](#pub
    <dt>-J, --joburl</dt>
    <dd>Optional, The url to the job's build logs. This value is automatically set by the CLI in IBM Continuous Delivery pipeline.</dd>
 </dl>
+-->
 
 **Example**:
 ```
@@ -124,18 +127,28 @@ or
 ibmcloud doi publishbuildrecord  --branch master --repositoryurl "https://github.com/oic/dlms.git" --commitid dff7884b9168168d91cb9e5aec78e93db0fa80d9 --status pass --logicalappname testapp --buildnumber master:199
 ```
 
-### ibmcloud doi publishtestrecord
+### Publishing test records
 {: #publishtestrecord}
 
- This command publishes a test record to DevOps Insights
+ The following command publishes a test record to {{site.data.keyword.DRA_short}}:
 
 ```
  ibmcloud doi publishtestrecord --filelocation FILELOCATION --type TYPE --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER [--drilldownurl DRILLDOWNURL] [--env ENV] [--sqtoken SONARQUBE_TOKEN] 
 ```
+The following are the command options for publishing test records. 
 
-**Prerequisites**: [Prerequisites](#prerequisites), ibmcloud login
+| Command Options                       | Required or Optional | Description                                                                                                                                     |
+|---------------------------------------|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| <nobr>`-F`, `--filelocation`</nobr>   | Required             | Location of the results you want to upload. It can be a single file, entire directory, or several files that match a wildcard expression.       |
+| <nobr>`-T`, `--type`</nobr>           | Required             | The type of test results that you want to upload.                                                                                               |
+| <nobr>`-L`, `--logicalappname`</nobr> | Required             | Name of the application.                                                                                                                        |
+| <nobr>`-N`, `--buildnumber`</nobr>    | Required             | Any string that identifies the build.                                                                                                           |
+| <nobr>`-U`, `--drilldownurl`</nobr>   | Optional             | A URL where more information about the test results can be found. If this URL is invalid, the option is ignored.                                | 
+| <nobr>`-E`, `--env`</nobr>            | Optional             | The environment name to associate with the test results. This option is ignored for unit tests, code coverage tests, and static security scans. |
+| <nobr>`-K`, `--sqtoken`</nobr>        | Optional             | This is a SonarQube token. Valid only if the type specified is SonarQube. Used to pull more information from the SonarQube server.              |
+{: caption="Table 2. Command options for publishing a build record" caption-side="top"}
 
-**Command Options**:
+<!--
 <dl>
    <dt>-F, --filelocation</dt>
    <dd>Required, The location of the test results that you want to upload. It can be a single file, an entire directory, or multiple files that match a wildcard expression.</dd>
@@ -152,25 +165,49 @@ ibmcloud doi publishbuildrecord  --branch master --repositoryurl "https://github
    <dt>-K, --sqtoken</dt>
    <dd>Optional, This is a SonarQube token. This flag is valid only if the type specified is sonarqube. It is used by the CLI to pull additional information from the SonarQube server.</dd> 
 </dl>
+-->
 
 **Example**:
+
 ```
 ibmcloud doi publishtestrecord -F "tests/fvt/*.json" -T fvt -L testapp -N master:199
 or
 ibmcloud doi publishtestrecord --filelocation "tests/fvt/*.json" --type fvt --logicalappname testapp --buildnumber master:199
 ```
 
-### ibmcloud doi publishdeployrecord
+The following test types are supported:
+
+| Type                  | Description                                                          |
+|-----------------------|----------------------------------------------------------------------|
+| `unittest`            | Unit test results                                                    |
+| `fvt`                 | Functional verification test (FVT) results                           |
+| `code`                | Code coverage results                                                |
+| `sonarqube`           | SonarQube scan results                                               |
+| `staticsecurityscan`  | Static security scan results from IBM Application Security on Cloud  |
+| `dynamicsecurityscan` | Dynamic security scan results from IBM Application Security on Cloud |
+| `vulnerabilityadvisor`| Vulnerability Advisor results from IBM Vulnerability Advisor on Cloud|
+{: caption="Table 3. Test record types" caption-side="top"}
+
+### Publishing a deployment record
 {: #publishdeployrecord}
- This command publishes a deployment record to DevOps Insights
+
+ The following command publishes a deployment record to {{site.data.keyword.DRA_short}}:
 
 ```
  ibmcloud doi publishdeployrecord --env ENV --status STATUS --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER [--joburl JOBURL] [--appurl APPURL] 
 ```
 
-**Prerequisites**: [Prerequisites](#prerequisites), ibmcloud login
+| Command Options                       | Required or Optional | Description                                                                                                            |
+|---------------------------------------|----------------------|------------------------------------------------------------------------------------------------------------------------|
+| <nobr>`-E`, `--env`</nobr>            | Required             | The environment where the pipeline job deployed the app.                                                               |
+| <nobr>`-S`, `--status`</nobr>         | Required             | The deployment status. This value must be either pass or fail.                                                         |
+| <nobr>`-L`, `--logicalappname`</nobr> | Required             | Name of the application.                                                                                               |
+| <nobr>`-N`, `--buildnumber`</nobr>    | Required             | Any string that identifies the build.                                                                                  |
+| <nobr>`-A`, `--appurl`</nobr>         | Optional             | The URL where the deployed app is running.                                                                             |
+| <nobr>`-J`, `--joburl`</nobr>         | Optional             | The URL to the job's build logs automatically set by the CLI in the {{site.data.keyword.deliverypipelinelong}}. |
+{: caption="Table 4. Command options for publishing a deployment record" caption-side="top"}
 
-**Command Options**:
+<!--
 <dl>
    <dt>-E, --env</dt>
    <dd>Required, The environment where the pipeline job deployed the app.</dd>
@@ -185,8 +222,10 @@ ibmcloud doi publishtestrecord --filelocation "tests/fvt/*.json" --type fvt --lo
    <dt>-A, --appurl</dt>
    <dd>Optional, The URL where the deployed app is running.</dd>
 </dl>
+-->
 
 **Example**:
+
 ```
 ibmcloud doi publishdeployrecord -E "staging" -S pass -L testapp -N master:199
 or
@@ -194,16 +233,27 @@ ibmcloud doi publishdeployrecord --env "staging" --status pass --logicalappname 
 ```
 
 
-### ibmcloud doi evaluategate
+### Evaluating gates 
 {: #evaluategate}
- This command evaluates a DevOps Insights gate
+
+ The following command evaluates a {{site.data.keyword.DRA_short}} gate:
+
 ```
  ibmcloud doi evaluategate --policy POLICY --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER [--forcedecision] [--ruletype RULETYPE] 
 ```
 
-**Prerequisites**: [Prerequisites](#prerequisites), ibmcloud login
+The following are command options for evaluating gates:
 
-**Command Options**:
+| Command Options | Required or Optional | Description |
+|-----------------|----------------------|-------------|
+| <nobr>`-P`, `--policy`</nobr> | Required | The name of the policy that the gate uses to make its decision. |
+| <nobr>`-L`, `--logicalappname`</nobr> | Required | Name of the application. |
+| <nobr>`-N`, `--buildnumber`</nobr> | Required | Any string that identifies the build. |
+| <nobr>`-D`, `--forcedecision`</nobr> | Optional | Set the value to true to exit with an error code if the policy evaluation fails. The value defaults to false if this option isn't specified. |
+| <nobr>`-E`, `--ruletype`</nobr> | Optional | A rule type to consider. If you include this option, only rules of this type are considered in the decision-making process. |
+{: caption="Table 5. Command options for evaluating gates" caption-side="top"}
+
+<!--
 <dl>
    <dt>-P, --policy</dt>
    <dd>Required, The name of the policy that the gate uses to make its decision.</dd>
@@ -216,6 +266,7 @@ ibmcloud doi publishdeployrecord --env "staging" --status pass --logicalappname 
    <dt>-E, --ruletype</dt>
    <dd>Optional, A rule type to consider. If you include this option, only rules of this type are considered in the decision-making process. The value can be code for code coverage, unittest for unit tests, fvt for FVT tests, staticsecurityscan for static security scans, dynamicsecurityscan for dynamic app scans, sonarqube for SonarQube scans, and vulnerabilityadvisor for Vulnerability Advisor scans.</dd>  
 </dl>
+-->
 
 **Example**:
 ```
