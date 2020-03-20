@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2019
-lastupdated: "2019-08-08"
+  years: 2019, 2020
+lastupdated: "2020-03-19"
 
 keywords: doi, devops insights, cli, plug-in
 
@@ -17,20 +17,21 @@ keywords: doi, devops insights, cli, plug-in
 {:important: .important}
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
+{:external: target="_blank" .external}
 
 # {{site.data.keyword.DRA_short}} CLI
 {: #CLI_devops-insights}
 
-The {{site.data.keyword.DRA_full}} CLI provides a set of commands that can be used to integrate your build with {{site.data.keyword.DRA_short}} (doi). There are two different commands that you must use: CLI usage commands and CLI commands to integrate with {{site.data.keyword.DRA_short}}.
+The {{site.data.keyword.DRA_full}} CLI provides a set of commands that can be used to integrate your build with {{site.data.keyword.DRA_short}} (doi). You must two different commands: CLI usage commands and CLI commands to integrate with {{site.data.keyword.DRA_short}}.
 {:shortdesc}
 
 
 ## Before you begin
 {: #prerequisites}
 
-* Install the {{site.data.keyword.Bluemix_notm}} CLI. See [Download {{site.data.keyword.Bluemix_notm}} CLI ![External link icon](../icons/launch-glyph.svg)](http://plugins.ng.bluemix.net/ui/home.html){: new_window} for instructions.
+* Install the {{site.data.keyword.cloud_notm}} CLI. See [Download {{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cloud-cli-getting-started){: external} for instructions.
 
-* Add the {{site.data.keyword.Bluemix_notm}} CLI plug-in. Run the following command:
+* Add the {{site.data.keyword.cloud_notm}} CLI plug-in. Run the following command:
 
 ```
 ibmcloud plugin install doi
@@ -38,13 +39,13 @@ ibmcloud plugin install doi
 
 * Access to a toolchain with the {{site.data.keyword.DRA_short}} tool configured for that toolchain. For more information about toolchains, see [Creating a toolchain from an app](/docs/services/ContinuousDelivery?topic=ContinuousDelivery-toolchains_getting_started#creating_a_toolchain_from_an_app).  
 
-* Set the `TOOLCHAIN_ID` as the environment variable to make it the toolchain's GUID. The toolchain ID is found in the toolchain URL that is shown in the browser. If you're using {{site.data.keyword.deliverypipelinelong}}, you set the `TOOLCHAIN_ID` environment variable to send your build data to a different toolchain. For more information, see [Aggregating data from multiple sources into a single toolchain](/docs/services/DevOpsInsights?topic=DevOpsInsights-aggregating-multiple-sources).
+* Set the `TOOLCHAIN_ID` as the environment variable to make it the toolchain's GUID. The toolchain ID is found in the toolchain URL that is shown in the browser. If you're using {{site.data.keyword.deliverypipelinelong}}, you set the `TOOLCHAIN_ID` environment variable to send your build data to a different toolchain. For more information, see [Aggregating data from multiple sources into a single toolchain](/docs/ContinuousDelivery?topic=ContinuousDelivery-aggregating-multiple-sources).
 
 
 ## Login
 {: #login}
 
-Use this command to log in to {{site.data.keyword.Bluemix_notm}}. The API_KEY must have access to the toolchain.
+Use this command to log in to {{site.data.keyword.cloud_notm}}. The API_KEY must have access to the toolchain.
 
 ```
 ibmcloud login --apikey API_KEY
@@ -126,7 +127,7 @@ The following are the command options for publishing test records.
 | <nobr>`-N`, `--buildnumber`</nobr>    | Required             | Any string that identifies the build.                                                                                                           |
 | <nobr>`-U`, `--drilldownurl`</nobr>   | Optional             | A URL where more information about the test results can be found. If this URL is invalid, the option is ignored.                                | 
 | <nobr>`-E`, `--env`</nobr>            | Optional             | The environment name to associate with the test results. This option is ignored for unit tests, code coverage tests, and static security scans. |
-| <nobr>`-K`, `--sqtoken`</nobr>        | Optional             | This command is a SonarQube token. Valid only if the type specified is SonarQube. Used to pull more information from the SonarQube server.              |
+| <nobr>`-K`, `--sqtoken`</nobr>        | Optional             | This command is a SonarQube token. Valid only if the type specified is SonarQube. Used to pull more information from the SonarQube server.      |
 {: caption="Table 2. Command options for publishing a build record" caption-side="top"}
 
 **Example**:
@@ -139,15 +140,15 @@ ibmcloud doi publishtestrecord --filelocation "tests/fvt/*.json" --type fvt --lo
 
 The following test types are supported:
 
-| Type                  | Description                                                          |
-|-----------------------|----------------------------------------------------------------------|
-| `unittest`            | Unit test results                                                    |
-| `fvt`                 | Functional verification test (FVT) results                           |
-| `code`                | Code coverage results                                                |
-| `sonarqube`           | SonarQube scan results                                               |
-| `staticsecurityscan`  | Static security scan results from IBM Application Security on Cloud  |
-| `dynamicsecurityscan` | Dynamic security scan results from IBM Application Security on Cloud |
-| `vulnerabilityadvisor`| Vulnerability Advisor results from IBM Vulnerability Advisor on Cloud|
+| Type                   | Description                                                           |
+|------------------------|-----------------------------------------------------------------------|
+| `unittest`             | Unit test results                                                     |
+| `fvt`                  | Functional verification test (FVT) results                            |
+| `code`                 | Code coverage results                                                 |
+| `sonarqube`            | SonarQube scan results                                                |
+| `staticsecurityscan`   | Static security scan results from IBM Application Security on Cloud   |
+| `dynamicsecurityscan`  | Dynamic security scan results from IBM Application Security on Cloud  |
+| `vulnerabilityadvisor` | Vulnerability Advisor results from IBM Vulnerability Advisor on Cloud |
 {: caption="Table 3. Test record types" caption-side="top"}
 
 ### Publishing a deployment record
@@ -159,13 +160,13 @@ The following test types are supported:
  ibmcloud doi publishdeployrecord --env ENV --status STATUS --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER [--joburl JOBURL] [--appurl APPURL] 
 ```
 
-| Command Options                       | Required or Optional | Description                                                                                                            |
-|---------------------------------------|----------------------|------------------------------------------------------------------------------------------------------------------------|
-| <nobr>`-E`, `--env`</nobr>            | Required             | The environment where the pipeline job deployed the app.                                                               |
-| <nobr>`-S`, `--status`</nobr>         | Required             | The deployment status. This value must be either pass or fail.                                                         |
-| <nobr>`-L`, `--logicalappname`</nobr> | Required             | Name of the application.                                                                                               |
-| <nobr>`-N`, `--buildnumber`</nobr>    | Required             | Any string that identifies the build.                                                                                  |
-| <nobr>`-A`, `--appurl`</nobr>         | Optional             | The URL where the deployed app is running.                                                                             |
+| Command Options                       | Required or Optional | Description                                                                                                     |
+|---------------------------------------|----------------------|-----------------------------------------------------------------------------------------------------------------|
+| <nobr>`-E`, `--env`</nobr>            | Required             | The environment where the pipeline job deployed the app.                                                        |
+| <nobr>`-S`, `--status`</nobr>         | Required             | The deployment status. This value must be either pass or fail.                                                  |
+| <nobr>`-L`, `--logicalappname`</nobr> | Required             | Name of the application.                                                                                        |
+| <nobr>`-N`, `--buildnumber`</nobr>    | Required             | Any string that identifies the build.                                                                           |
+| <nobr>`-A`, `--appurl`</nobr>         | Optional             | The URL where the deployed app is running.                                                                      |
 | <nobr>`-J`, `--joburl`</nobr>         | Optional             | The URL to the job's build logs automatically set by the CLI in the {{site.data.keyword.deliverypipelinelong}}. |
 {: caption="Table 4. Command options for publishing a deployment record" caption-side="top"}
 
@@ -189,13 +190,13 @@ ibmcloud doi publishdeployrecord --env "staging" --status pass --logicalappname 
 
 The following are command options for evaluating gates:
 
-| Command Options | Required or Optional | Description |
-|-----------------|----------------------|-------------|
-| <nobr>`-P`, `--policy`</nobr> | Required | The name of the policy that the gate uses to make its decision. |
-| <nobr>`-L`, `--logicalappname`</nobr> | Required | Name of the application. |
-| <nobr>`-N`, `--buildnumber`</nobr> | Required | Any string that identifies the build. |
-| <nobr>`-D`, `--forcedecision`</nobr> | Optional | Set the value to true to exit with an error code if the policy evaluation fails. The value defaults to false if this option isn't specified. |
-| <nobr>`-E`, `--ruletype`</nobr> | Optional | A rule type to consider. If you include this option, only rules of this type are considered in the decision-making process. |
+| Command Options                       | Required or Optional | Description                                                                                                                                  |
+|---------------------------------------|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| <nobr>`-P`, `--policy`</nobr>         | Required             | The name of the policy that the gate uses to make its decision.                                                                              |
+| <nobr>`-L`, `--logicalappname`</nobr> | Required             | Name of the application.                                                                                                                     |
+| <nobr>`-N`, `--buildnumber`</nobr>    | Required             | Any string that identifies the build.                                                                                                        |
+| <nobr>`-D`, `--forcedecision`</nobr>  | Optional             | Set the value to true to exit with an error code if the policy evaluation fails. The value defaults to false if this option isn't specified. |
+| <nobr>`-E`, `--ruletype`</nobr>       | Optional             | A rule type to consider. If you include this option, only rules of this type are considered in the decision-making process.                  |
 {: caption="Table 5. Command options for evaluating gates" caption-side="top"}
 
 **Example**:
