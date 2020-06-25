@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019, 2020
-lastupdated: "2020-05-13"
+lastupdated: "2020-06-24"
 
 keywords: doi, devops insights, cli, plug-in
 
@@ -29,7 +29,7 @@ The {{site.data.keyword.DRA_full}} CLI provides a set of commands that you can u
 ## Before you begin
 {: #prerequisites}
 
-* Install the {{site.data.keyword.cloud_notm}} CLI. See [Download {{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cloud-cli-getting-started){: external} for instructions.
+* Install the {{site.data.keyword.cloud_notm}} CLI. See [Download {{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-getting-started) for instructions.
 
 * Add the {{site.data.keyword.cloud_notm}} CLI plug-in. Run the following command:
 
@@ -93,7 +93,7 @@ The value of the `logicalappname` and `buildnumber` parameters that are passed t
  The following command publishes a build record to {{site.data.keyword.DRA_short}}:
 
 ```
- ibmcloud doi publishbuildrecord --branch BRANCH --repositoryurl REPOSITORYURL --commitid COMMITID --status STATUS --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--joburl JOBURL]
+ ibmcloud doi buildrecord-publish --branch BRANCH --repositoryurl REPOSITORYURL --commitid COMMITID --status STATUS --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--joburl JOBURL]
 ```
 
 The following are the command options for publishing a build record. 
@@ -112,9 +112,9 @@ The following are the command options for publishing a build record.
 
 #### Example
 ```
-ibmcloud doi publishbuildrecord  -B master -R "https://github.com/oic/dlms.git" -C dff7884b9168168d91cb9e5aec78e93db0fa80d9 -S pass -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
+ibmcloud doi buildrecord-publish  -B master -R "https://github.com/oic/dlms.git" -C dff7884b9168168d91cb9e5aec78e93db0fa80d9 -S pass -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
 or
-ibmcloud doi publishbuildrecord  --branch master --repositoryurl "https://github.com/oic/dlms.git" --commitid dff7884b9168168d91cb9e5aec78e93db0fa80d9 --status pass --logicalappname testapp --buildnumber master:199 --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
+ibmcloud doi buildrecord-publish  --branch master --repositoryurl "https://github.com/oic/dlms.git" --commitid dff7884b9168168d91cb9e5aec78e93db0fa80d9 --status pass --logicalappname testapp --buildnumber master:199 --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
 ```
 
 ### Publishing a test record
@@ -123,7 +123,7 @@ ibmcloud doi publishbuildrecord  --branch master --repositoryurl "https://github
  The following command publishes a test record to {{site.data.keyword.DRA_short}}:
 
 ```
- ibmcloud doi publishtestrecord --filelocation FILELOCATION --type TYPE --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--drilldownurl DRILLDOWNURL] [--env ENV] [--sqtoken SONARQUBE_TOKEN] 
+ ibmcloud doi testrecord-publish --filelocation FILELOCATION --type TYPE --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--drilldownurl DRILLDOWNURL] [--env ENV] [--sqtoken SONARQUBE_TOKEN] 
 ```
 The following are the command options for publishing test records. 
 
@@ -142,9 +142,9 @@ The following are the command options for publishing test records.
 #### Example
 
 ```
-ibmcloud doi publishtestrecord -F "tests/fvt/*.json" -T fvt -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
+ibmcloud doi testrecord-publish -F "tests/fvt/*.json" -T fvt -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
 or
-ibmcloud doi publishtestrecord --filelocation "tests/fvt/*.json" --type fvt --logicalappname testapp --buildnumber master:199 --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
+ibmcloud doi testrecord-publish --filelocation "tests/fvt/*.json" --type fvt --logicalappname testapp --buildnumber master:199 --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
 ```
 
 The following test types are supported:
@@ -166,7 +166,7 @@ The following test types are supported:
  The following command publishes a deployment record to {{site.data.keyword.DRA_short}}:
 
 ```
- ibmcloud doi publishdeployrecord --env ENV --status STATUS --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--joburl JOBURL] [--appurl APPURL] 
+ ibmcloud doi deployrecord-publish --env ENV --status STATUS --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--joburl JOBURL] [--appurl APPURL] 
 ```
 
 | Command Options                       | Required or Optional | Description                                                                                                     |
@@ -183,9 +183,9 @@ The following test types are supported:
 #### Example
 
 ```
-ibmcloud doi publishdeployrecord -E "staging" -S pass -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
+ibmcloud doi deployrecord-publish -E "staging" -S pass -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
 or
-ibmcloud doi publishdeployrecord --env "staging" --status pass --logicalappname testapp --buildnumber master:199 --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
+ibmcloud doi deployrecord-publish --env "staging" --status pass --logicalappname testapp --buildnumber master:199 --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
 ```
 
 
@@ -195,7 +195,7 @@ ibmcloud doi publishdeployrecord --env "staging" --status pass --logicalappname 
  The following command evaluates a {{site.data.keyword.DRA_short}} gate:
 
 ```
- ibmcloud doi evaluategate --policy POLICY --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--forcedecision] [--ruletype RULETYPE] 
+ ibmcloud doi gate-evaluate --policy POLICY --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--forcedecision] [--ruletype RULETYPE] 
 ```
 
 The following are command options for evaluating gates:
@@ -213,9 +213,9 @@ The following are command options for evaluating gates:
 #### Example
 
 ```
-ibmcloud doi evaluategate -P "policyname" -D true -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
+ibmcloud doi gate-evaluate -P "policyname" -D true -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
 or
-ibmcloud doi evaluategate --policy "policyname" --forcedecision true --logicalappname testapp --buildnumber master:199 --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
+ibmcloud doi gate-evaluate --policy "policyname" --forcedecision true --logicalappname testapp --buildnumber master:199 --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
 ```
 
 ### Updating custom data sets and policies
@@ -224,7 +224,7 @@ ibmcloud doi evaluategate --policy "policyname" --forcedecision true --logicalap
  The following command creates and updates custom data sets and policies for a toolchain:
 
 ```
- ibmcloud doi updatepolicies --file FILELOCATION --toolchainid TOOLCHAINID [--dryrun]
+ ibmcloud doi policies-update --file FILELOCATION --toolchainid TOOLCHAINID [--dryrun]
 ```
 
 The following are command options for updating custom data sets and policies:
@@ -239,9 +239,9 @@ The following are command options for updating custom data sets and policies:
 #### Example
 
 ```
-ibmcloud doi updatepolicies -F "policies/policy.json" -I b531487c-9c22-4f3b-9d20-5be408d57891
+ibmcloud doi policies-update -F "policies/policy.json" -I b531487c-9c22-4f3b-9d20-5be408d57891
 or
-ibmcloud doi updatepolicies --file "policies/policy.json" --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
+ibmcloud doi policies-update --file "policies/policy.json" --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
 ```
 
 #### JSON file structure for the `updatepolicies` command
@@ -260,11 +260,11 @@ A valid JSON file structure contains two fields:
 * Either the `custom_datasets` or `policies` array can be empty, or both can be empty.
 * The only valid values for a `type_of_test` custom data set are `test` and `code`.
 * If a custom data set exists for a toolchain, it can be used in the policy rules that are defined within the JSON file. You are not always required to define the custom data set within the JSON file.
-* The sample JSON file that is provided for the `updatepolicies` command lists all of the possible rule types that you can specify in a policy. All of the fields in those rules are required.
+* The sample JSON file that is provided for the `policies-update` command lists all of the possible rule types that you can specify in a policy. All of the fields in those rules are required.
 * Use only one rule per data set.
 * The name field within a rule is optional.
 
-#### Sample JSON file for the `updatepolicies` command
+#### Sample JSON file for the `policies-update` command
 
 This sample JSON file contains two custom data sets and two policies. The first policy, `name: "Orders"`, contains all of the rule types that you can use within a policy.
 
