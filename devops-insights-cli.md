@@ -110,6 +110,8 @@ The following are the command options for publishing a build record.
 {: caption="Table 1. Command options for publishing a build record" caption-side="top"}
 
 #### Example
+{: #example1}
+
 ```
 ibmcloud doi buildrecord-publish  -B master -R "https://github.com/oic/dlms.git" -C dff7884b9168168d91cb9e5aec78e93db0fa80d9 -S pass -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
 or
@@ -139,6 +141,7 @@ The following are the command options for publishing test records.
 {: caption="Table 2. Command options for publishing a build record" caption-side="top"}
 
 #### Example
+{: #example2}
 
 ```
 ibmcloud doi testrecord-publish -F "tests/fvt/*.json" -T fvt -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
@@ -180,6 +183,7 @@ The following test types are supported:
 {: caption="Table 4. Command options for publishing a deployment record" caption-side="top"}
 
 #### Example
+{: #example3}
 
 ```
 ibmcloud doi deployrecord-publish -E "staging" -S pass -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
@@ -210,6 +214,7 @@ The following are command options for evaluating gates:
 {: caption="Table 5. Command options for evaluating gates" caption-side="top"}
 
 #### Example
+{: #example4}
 
 ```
 ibmcloud doi gate-evaluate -P "policyname" -D true -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
@@ -236,6 +241,7 @@ The following are command options for updating custom data sets and policies:
 {: caption="Table 6. Command options for updating custom data sets and policies" caption-side="top"}
 
 #### Example
+{: #example5}
 
 ```
 ibmcloud doi policies-update -F "policies/policy.json" -I b531487c-9c22-4f3b-9d20-5be408d57891
