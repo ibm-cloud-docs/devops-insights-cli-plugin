@@ -6,6 +6,8 @@ lastupdated: "2020-06-24"
 
 keywords: doi, devops insights, cli, plug-in
 
+subcollection: devops-insights-cli-plugin
+
 ---
 
 {:shortdesc: .shortdesc}
