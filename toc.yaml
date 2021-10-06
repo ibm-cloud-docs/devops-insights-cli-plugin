@@ -4,7 +4,7 @@ toc:
     subcollection: devops-insights-cli-plugin
     version: 2
     category: platform_services
-    audience: cli
+    audience: platform
     href: /docs/devops-insights-cli-plugin
     console-page: /devops/getting-started
     product-page: https://www.ibm.com/cloud/continuous-delivery
