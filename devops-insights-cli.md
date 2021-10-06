@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2019, 2020
-lastupdated: "2020-06-24"
+  years: 2019, 2021
+lastupdated: "2020-10-05"
 
 keywords: doi, devops insights, cli, plug-in
 
@@ -24,7 +24,7 @@ subcollection: devops-insights-cli-plugin
 {: #CLI_devops-insights}
 
 The {{site.data.keyword.DRA_full}} CLI provides a set of commands that you can use to integrate your build with {{site.data.keyword.DRA_short}}. You must use two different types of commands: CLI usage commands and CLI commands to integrate with {{site.data.keyword.DRA_short}}.
-{:shortdesc}
+{: shortdesc}
 
 
 ## Before you begin
@@ -34,20 +34,21 @@ The {{site.data.keyword.DRA_full}} CLI provides a set of commands that you can u
 
 * Add the {{site.data.keyword.cloud_notm}} CLI plug-in. Run the following command:
 
-```
+```text
 ibmcloud plugin install doi
 ```
+{: codeblock}
 
-* Make sure you can access a toolchain with the {{site.data.keyword.DRA_short}} tool that is configured for that toolchain. For more information about toolchains, see [Creating a toolchain from an app](/docs/services/ContinuousDelivery?topic=ContinuousDelivery-toolchains_getting_started#creating_a_toolchain_from_an_app).  
+* Make sure you can access a toolchain with the {{site.data.keyword.DRA_short}} tool that is configured for that toolchain. For more information about toolchains, see [Creating a toolchain from an app](/docs/ContinuousDelivery?topic=ContinuousDelivery-toolchains_getting_started#creating_a_toolchain_from_an_app).  
 
 * Specify the toolchain ID by using one of the following methods:
-  - Specify the toolchain ID as a CLI parameter to the command.
-  - Set the `TOOLCHAIN_ID` environment variable.
-  - Your {{site.data.keyword.contdelivery_full}} pipeline might automatically set the `PIPELINE_TOOLCHAIN_ID` environment variable.
+   - Specify the toolchain ID as a CLI parameter to the command.
+   - Set the `TOOLCHAIN_ID` environment variable.
+   - Your {{site.data.keyword.contdelivery_full}} pipeline might automatically set the `PIPELINE_TOOLCHAIN_ID` environment variable.
 
-  The CLI needs the value of the toolchain ID. The value of toolchain ID that is specified in the CLI parameter overrides the value of environment variable.
+   The CLI needs the value of the toolchain ID. The value of toolchain ID that is specified in the CLI parameter overrides the value of environment variable.
 
-  The toolchain ID is found in the toolchain URL that is shown in the browser. If you're using {{site.data.keyword.deliverypipelinelong}}, you can set the toolchain ID to send your build data to a different toolchain. For more information, see [Aggregating data from multiple sources into a single toolchain](/docs/ContinuousDelivery?topic=ContinuousDelivery-aggregating-multiple-sources).
+   The toolchain ID is found in the toolchain URL that is shown in the browser. If you're using {{site.data.keyword.deliverypipelinelong}}, you can set the toolchain ID to send your build data to a different toolchain. For more information, see [Aggregating data from multiple sources into a single toolchain](/docs/ContinuousDelivery?topic=ContinuousDelivery-aggregating-multiple-sources).
 
 
 ## Login
@@ -55,9 +56,10 @@ ibmcloud plugin install doi
 
 Use this command to log in to {{site.data.keyword.cloud_notm}}. The API_KEY must have access to the toolchain.
 
-```
+```text
 ibmcloud login --apikey API_KEY
 ```
+{: codeblock}
 
 ## CLI usage commands
 {: #CLI-usage-commands}
@@ -67,19 +69,20 @@ ibmcloud login --apikey API_KEY
 
  The following command displays the list of {{site.data.keyword.DRA_short}} commands:
 
-```
+```text
  ibmcloud doi --help
 ```
+{: codeblock}
 
 ### {{site.data.keyword.DRA_short}} command help
 {: #ibmcloud-command-help}
 
  The following command displays the details of flags that are needed for a command:
 
-```
+```text
  ibmcloud doi <command> --help
 ```
-
+{: codeblock}
 
 ## Commands to integrate with {{site.data.keyword.DRA_short}}
 {: #commands-integrate-insights}
@@ -91,11 +94,12 @@ The value of the `logicalappname` and `buildnumber` parameters that are passed t
 ### Publishing a build record
 {: #publishbuildrecord}
 
- The following command publishes a build record to {{site.data.keyword.DRA_short}}:
+The following command publishes a build record to {{site.data.keyword.DRA_short}}:
 
-```
+```bash
  ibmcloud doi buildrecord-publish --branch BRANCH --repositoryurl REPOSITORYURL --commitid COMMITID --status STATUS --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--joburl JOBURL]
 ```
+{: codeblock}
 
 The following are the command options for publishing a build record. 
 
@@ -114,20 +118,23 @@ The following are the command options for publishing a build record.
 #### Example
 {: #example1}
 
-```
+```bash
 ibmcloud doi buildrecord-publish  -B master -R "https://github.com/oic/dlms.git" -C dff7884b9168168d91cb9e5aec78e93db0fa80d9 -S pass -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
 or
 ibmcloud doi buildrecord-publish  --branch master --repositoryurl "https://github.com/oic/dlms.git" --commitid dff7884b9168168d91cb9e5aec78e93db0fa80d9 --status pass --logicalappname testapp --buildnumber master:199 --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
 ```
+{: codeblock}
 
 ### Publishing a test record
 {: #publishtestrecord}
 
  The following command publishes a test record to {{site.data.keyword.DRA_short}}:
 
-```
+```bash
  ibmcloud doi testrecord-publish --filelocation FILELOCATION --type TYPE --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--drilldownurl DRILLDOWNURL] [--env ENV] [--sqtoken SONARQUBE_TOKEN] 
 ```
+{: codeblock}
+
 The following are the command options for publishing test records. 
 
 | Command Options                       | Required or Optional | Description                                                                                                                                     |
@@ -145,11 +152,12 @@ The following are the command options for publishing test records.
 #### Example
 {: #example2}
 
-```
+```bash
 ibmcloud doi testrecord-publish -F "tests/fvt/*.json" -T fvt -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
 or
 ibmcloud doi testrecord-publish --filelocation "tests/fvt/*.json" --type fvt --logicalappname testapp --buildnumber master:199 --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
 ```
+{: codeblock}
 
 The following test types are supported:
 
@@ -169,9 +177,10 @@ The following test types are supported:
 
  The following command publishes a deployment record to {{site.data.keyword.DRA_short}}:
 
-```
+```bash
  ibmcloud doi deployrecord-publish --env ENV --status STATUS --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--joburl JOBURL] [--appurl APPURL] 
 ```
+{: codeblock}
 
 | Command Options                       | Required or Optional | Description                                                                                                     |
 |---------------------------------------|----------------------|-----------------------------------------------------------------------------------------------------------------|
@@ -187,21 +196,22 @@ The following test types are supported:
 #### Example
 {: #example3}
 
-```
+```bash
 ibmcloud doi deployrecord-publish -E "staging" -S pass -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
 or
 ibmcloud doi deployrecord-publish --env "staging" --status pass --logicalappname testapp --buildnumber master:199 --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
 ```
-
+{: codeblock}
 
 ### Evaluating gates 
 {: #evaluategate}
 
  The following command evaluates a {{site.data.keyword.DRA_short}} gate:
 
-```
+```bash
  ibmcloud doi gate-evaluate --policy POLICY --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--forcedecision] [--ruletype RULETYPE] 
 ```
+{: codeblock}
 
 The following are command options for evaluating gates:
 
@@ -218,20 +228,22 @@ The following are command options for evaluating gates:
 #### Example
 {: #example4}
 
-```
+```bash
 ibmcloud doi gate-evaluate -P "policyname" -D true -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
 or
 ibmcloud doi gate-evaluate --policy "policyname" --forcedecision true --logicalappname testapp --buildnumber master:199 --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
 ```
+{: codeblock}
 
 ### Updating custom data sets and policies
 {: #updatepolicies}
 
  The following command creates and updates custom data sets and policies for a toolchain:
 
-```
+```bash
  ibmcloud doi policies-update --file FILELOCATION --toolchainid TOOLCHAINID [--dryrun]
 ```
+{: codeblock}
 
 The following are command options for updating custom data sets and policies:
 
@@ -245,22 +257,24 @@ The following are command options for updating custom data sets and policies:
 #### Example
 {: #example5}
 
-```
+```bash
 ibmcloud doi policies-update -F "policies/policy.json" -I b531487c-9c22-4f3b-9d20-5be408d57891
 or
 ibmcloud doi policies-update --file "policies/policy.json" --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
 ```
+{: codeblock}
 
 #### JSON file structure for the `updatepolicies` command
 
 A valid JSON file structure contains two fields:
 
-```
+```bash
 {
       "custom_datasets": [],
       "policies": []
 }
 ```
+{: codeblock}
 
 * You can specify any number of policies (and custom data sets) for the array.
 * If the specified policy (and custom data set) already exists for a toolchain, the policy is updated or created.
@@ -272,10 +286,11 @@ A valid JSON file structure contains two fields:
 * The name field within a rule is optional.
 
 #### Sample JSON file for the `policies-update` command
+{: #sample-policies-update}
 
 This sample JSON file contains two custom data sets and two policies. The first policy, `name: "Orders"`, contains all of the rule types that you can use within a policy.
 
-```
+```bash
 {
   "custom_datasets": [
  .  {
@@ -378,26 +393,31 @@ This sample JSON file contains two custom data sets and two policies. The first 
   ]
 }
 ```
+{: codeblock}
 
 ## FAQs
 {: #faq}
 
- Get answers to frequently asked questions about using the {{site.data.keyword.DRA_short}} CLI.
+Get answers to frequently asked questions about using the {{site.data.keyword.DRA_short}} CLI.
  
- ### Why does the CLI fail with the "You do not have access to the toolchain" message?
+### Why does the CLI fail with the "You do not have access to the toolchain" message?
+{: #faq-no-toolchain-access}
   
- The `API_KEY` environment variable that is used to log in to {{site.data.keyword.cloud_notm}} must be able to access the toolchain. Also, verify that you added the {{site.data.keyword.DRA_short}} tool integration to your toolchain.
+The `API_KEY` environment variable that is used to log in to {{site.data.keyword.cloud_notm}} must be able to access the toolchain. Also, verify that you added the {{site.data.keyword.DRA_short}} tool integration to your toolchain.
 
- ### The CLI successfully ran, why doesn't the data show up on the dashboard?
+### The CLI successfully ran, why doesn't the data show up on the dashboard?
+{: #faq-no-data-dashboard}
  
- Make sure that the value of the `logicalappname` and `buildnumber` parameters that are passed to the CLI are the same across all of the stages for the build. Also, verify that a build record is uploaded for the build. The data for test records that are uploaded for a specific build does not appear on the dashboard without a build record.
+Make sure that the value of the `logicalappname` and `buildnumber` parameters that are passed to the CLI are the same across all of the stages for the build. Also, verify that a build record is uploaded for the build. The data for test records that are uploaded for a specific build does not appear on the dashboard without a build record.
 
- ### How can I determine why the CLI failed?
+### How can I determine why the CLI failed?
+{: #faq-cli-debug}
  
- Before you call the {{site.data.keyword.DRA_short}} CLI, set the `IBMCLOUD_TRACE` environment variable to true to turn on the debug log.
+Before you call the {{site.data.keyword.DRA_short}} CLI, set the `IBMCLOUD_TRACE` environment variable to true to turn on the debug log.
       
-  ```
+```bash
     export IBMCLOUD_TRACE=true
-  ```
+```
+{: codeblock}
       
 Observe the API calls and the responses that are shown in the log to determine the exact reason for failure.
