@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019, 2021
-lastupdated: "2020-10-05"
+lastupdated: "2020-10-06"
 
 keywords: doi, devops insights, cli, plug-in
 
@@ -105,14 +105,14 @@ The following are the command options for publishing a build record.
 
 | Command Options                       | Required or Optional | Description                                                                                                             |
 |---------------------------------------|----------------------|-------------------------------------------------------------------------------------------------------------------------|
-| <nobr>`-B`, `--branch`</nobr>         | Required             | The repository branch that the build is being performed.                                                                | 
-| <nobr>`-R`, `--repositoryurl`</nobr>  | Required             | The URL of the Git repository.                                                                                          |
-| <nobr>`-C`, `--commitid`</nobr>       | Required             | The Git commit ID.                                                                                                      |
-| <nobr>`-S`, `--status`</nobr>         | Required             | The build status. Acceptable values: `pass` and `fail`.                                                                 |
-| <nobr>`-L`, `--logicalappname`</nobr> | Required             | Name of the application.                                                                                                |
-| <nobr>`-N`, `--buildnumber`</nobr>    | Required             | Any string that identifies the build.                                                                                   |
-| <nobr>`-I`, `--toolchainid`</nobr>    | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
-| <nobr>`-J`, `--joburl`</nobr>         | Optional             | The URL to the job's build logs that is automatically set by the CLI in the {{site.data.keyword.deliverypipelinelong}}. |
+| `-B`, `--branch`        | Required             | The repository branch that the build is being performed.                                                                | 
+| `-R`, `--repositoryurl` | Required             | The URL of the Git repository.                                                                                          |
+| `-C`, `--commitid`      | Required             | The Git commit ID.                                                                                                      |
+| `-S`, `--status`        | Required             | The build status. Acceptable values: `pass` and `fail`.                                                                 |
+| `-L`, `--logicalappname`| Required             | Name of the application.                                                                                                |
+| `-N`, `--buildnumber`   | Required             | Any string that identifies the build.                                                                                   |
+| `-I`, `--toolchainid`   | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
+| `-J`, `--joburl`        | Optional             | The URL to the job's build logs that is automatically set by the CLI in the {{site.data.keyword.deliverypipelinelong}}. |
 {: caption="Table 1. Command options for publishing a build record" caption-side="top"}
 
 #### Example
@@ -139,14 +139,14 @@ The following are the command options for publishing test records.
 
 | Command Options                       | Required or Optional | Description                                                                                                                                     |
 |---------------------------------------|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>`-F`, `--filelocation`</nobr>   | Required             | Location of the results you want to upload. It can be a single file, entire directory, or several files that match a wildcard expression.       |
-| <nobr>`-T`, `--type`</nobr>           | Required             | The type of test results that you want to upload.                                                                                               |
-| <nobr>`-L`, `--logicalappname`</nobr> | Required             | Name of the application.                                                                                                                        |
-| <nobr>`-N`, `--buildnumber`</nobr>    | Required             | Any string that identifies the build.                                                                                                           |
-| <nobr>`-I`, `--toolchainid`</nobr>    | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
-| <nobr>`-U`, `--drilldownurl`</nobr>   | Optional             | A URL where more information about the test results can be found. If this URL is invalid, the option is ignored.                                | 
-| <nobr>`-E`, `--env`</nobr>            | Optional             | The environment name to associate with the test results. This option is ignored for unit tests, code coverage tests, and static security scans. |
-| <nobr>`-K`, `--sqtoken`</nobr>        | Optional             | This command is a SonarQube token. Valid only if the type specified is SonarQube. Used to pull more information from the SonarQube server.      |
+| `-F`, `--filelocation`  | Required             | Location of the results you want to upload. It can be a single file, entire directory, or several files that match a wildcard expression.       |
+| `-T`, `--type`          | Required             | The type of test results that you want to upload.                                                                                               |
+| `-L`, `--logicalappname`| Required             | Name of the application.                                                                                                                        |
+| `-N`, `--buildnumber`   | Required             | Any string that identifies the build.                                                                                                           |
+| `-I`, `--toolchainid`   | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
+| `-U`, `--drilldownurl`  | Optional             | A URL where more information about the test results can be found. If this URL is invalid, the option is ignored.                                | 
+| `-E`, `--env`           | Optional             | The environment name to associate with the test results. This option is ignored for unit tests, code coverage tests, and static security scans. |
+| `-K`, `--sqtoken`       | Optional             | This command is a SonarQube token. Valid only if the type specified is SonarQube. Used to pull more information from the SonarQube server.      |
 {: caption="Table 2. Command options for publishing a build record" caption-side="top"}
 
 #### Example
@@ -184,13 +184,13 @@ The following test types are supported:
 
 | Command Options                       | Required or Optional | Description                                                                                                     |
 |---------------------------------------|----------------------|-----------------------------------------------------------------------------------------------------------------|
-| <nobr>`-E`, `--env`</nobr>            | Required             | The environment where the pipeline job deployed the app.                                                        |
-| <nobr>`-S`, `--status`</nobr>         | Required             | The deployment status. This value must be either pass or fail.                                                  |
-| <nobr>`-L`, `--logicalappname`</nobr> | Required             | Name of the application.                                                                                        |
-| <nobr>`-N`, `--buildnumber`</nobr>    | Required             | Any string that identifies the build.                                                                           |
-| <nobr>`-I`, `--toolchainid`</nobr>    | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
-| <nobr>`-A`, `--appurl`</nobr>         | Optional             | The URL where the deployed app is running.                                                                      |
-| <nobr>`-J`, `--joburl`</nobr>         | Optional             | The URL to the job's build logs automatically set by the CLI in the {{site.data.keyword.deliverypipelinelong}}. |
+| `-E`, `--env`           | Required             | The environment where the pipeline job deployed the app.                                                        |
+| `-S`, `--status`        | Required             | The deployment status. This value must be either pass or fail.                                                  |
+| `-L`, `--logicalappname`| Required             | Name of the application.                                                                                        |
+| `-N`, `--buildnumber`   | Required             | Any string that identifies the build.                                                                           |
+| `-I`, `--toolchainid`   | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
+| `-A`, `--appurl`        | Optional             | The URL where the deployed app is running.                                                                      |
+| `-J`, `--joburl`        | Optional             | The URL to the job's build logs automatically set by the CLI in the {{site.data.keyword.deliverypipelinelong}}. |
 {: caption="Table 4. Command options for publishing a deployment record" caption-side="top"}
 
 #### Example
@@ -217,12 +217,12 @@ The following are command options for evaluating gates:
 
 | Command Options                       | Required or Optional | Description                                                                                                                                  |
 |---------------------------------------|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>`-P`, `--policy`</nobr>         | Required             | The name of the policy that the gate uses to make its decision.                                                                              |
-| <nobr>`-L`, `--logicalappname`</nobr> | Required             | Name of the application.                                                                                                                     |
-| <nobr>`-N`, `--buildnumber`</nobr>    | Required             | Any string that identifies the build.                                                                                                        |
-| <nobr>`-I`, `--toolchainid`</nobr>    | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
-| <nobr>`-D`, `--forcedecision`</nobr>  | Optional             | Set the value to true to exit with an error code if the policy evaluation fails. The value defaults to false if this option isn't specified. |
-| <nobr>`-E`, `--ruletype`</nobr>       | Optional             | A rule type to consider. If you include this option, only rules of this type are considered in the decision-making process.                  |
+| `-P`, `--policy`        | Required             | The name of the policy that the gate uses to make its decision.                                                                              |
+| `-L`, `--logicalappname`| Required             | Name of the application.                                                                                                                     |
+| `-N`, `--buildnumber`   | Required             | Any string that identifies the build.                                                                                                        |
+| `-I`, `--toolchainid`   | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
+| `-D`, `--forcedecision` | Optional             | Set the value to true to exit with an error code if the policy evaluation fails. The value defaults to false if this option isn't specified. |
+| `-E`, `--ruletype`      | Optional             | A rule type to consider. If you include this option, only rules of this type are considered in the decision-making process.                  |
 {: caption="Table 5. Command options for evaluating gates" caption-side="top"}
 
 #### Example
@@ -249,9 +249,9 @@ The following are command options for updating custom data sets and policies:
 
 | Command Options                       | Required or Optional | Description                                                                                                                                  |
 |---------------------------------------|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>`-F`, `--file`</nobr>           | Required             | The location of the JSON file that contains the list of custom data sets and policies to add or update. Both absolute and relative paths are accepted. |
-| <nobr>`-I`, `--toolchainid`</nobr>    | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
-| <nobr>`-D`, `--dryrun`</nobr>         | Optional             | The option to simulate only the changes, with no updates. |                 |
+| `-F`, `--file`          | Required             | The location of the JSON file that contains the list of custom data sets and policies to add or update. Both absolute and relative paths are accepted. |
+| `-I`, `--toolchainid`   | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
+| `-D`, `--dryrun`        | Optional             | The option to simulate only the changes, with no updates. |                 |
 {: caption="Table 6. Command options for updating custom data sets and policies" caption-side="top"}
 
 #### Example
