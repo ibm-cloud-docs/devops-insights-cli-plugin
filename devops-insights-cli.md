@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019, 2021
-lastupdated: "2020-11-29"
+lastupdated: "2021-11-29"
 
 keywords: doi, devops insights, cli, plug-in
 
