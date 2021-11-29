@@ -266,6 +266,7 @@ ibmcloud doi policies-update --file "policies/policy.json" --toolchainid b531487
 {: codeblock}
 
 #### JSON file structure for the `updatepolicies` command
+{: #json-updatepolicies}
 
 A valid JSON file structure contains two fields:
 
