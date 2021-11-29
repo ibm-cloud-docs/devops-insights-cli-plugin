@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019, 2021
-lastupdated: "2020-10-06"
+lastupdated: "2020-11-29"
 
 keywords: doi, devops insights, cli, plug-in
 
@@ -167,10 +167,11 @@ The following test types are supported:
 | `fvt`                  | Functional verification test (FVT) results                            |
 | `code`                 | Code coverage results                                                 |
 | `sonarqube`            | SonarQube scan results                                                |
-| `staticsecurityscan`   | Static security scan results from IBM Application Security on Cloud   |
-| `dynamicsecurityscan`  | Dynamic security scan results from IBM Application Security on Cloud  |
 | `vulnerabilityadvisor` | Vulnerability Advisor results from IBM Vulnerability Advisor on Cloud |
 {: caption="Table 3. Test record types" caption-side="top"}
+
+IBM Application Security on Cloud 1.0.0 is no longer published (`staticsecurityscan` and `dynamicsecurityscan` test types). All IBM Application Security on Cloud 1.0.0 support is provided by HCL. For more information, see the [HCL AppScan documentation](https://help.hcltechsw.com/appscan/Welcome.html){: external}.
+{: note}
 
 ### Publishing a deployment record
 {: #publishdeployrecord}
