@@ -87,7 +87,7 @@ ibmcloud login --apikey API_KEY
 ## Efficient use of this command
 {: #ibmcloud-command-efficient}
 
-A `--region` paramater can be passed to any of the commands. The value of this parameter should be the ibmcloud region of the toolchain. This eliminates the need for the CLI to figure out the region of the toolchain, making it more efficient and reliable. This parameter is optional for backward compatibility.
+A `--region` paramater can be passed to any of the command. The value of this parameter should be the ibmcloud region of the toolchain. This eliminates the need for the CLI to figure out which region the toolchain is in, making it more efficient and reliable. This parameter is optional for backward compatibility.
 
 {: codeblock}
 
@@ -120,7 +120,7 @@ The following are the command options for publishing a build record.
 | `-N`, `--buildnumber`   | Required             | Any string that identifies the build.                                                                                   |
 | `-I`, `--toolchainid`   | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
 | `-J`, `--joburl`        | Optional             | The URL to the job's build logs that is automatically set by the CLI in the {{site.data.keyword.deliverypipelinelong}}. |
-| `--region`              | Optional             | The IBMCloud region in which the toolchain exists.                                                                      |
+| `--region`              | Optional             | The IBMCloud region of the toolchain.                                                                       |
 {: caption="Table 1. Command options for publishing a build record" caption-side="top"}
 
 #### Example
@@ -156,7 +156,7 @@ The following are the command options for publishing test records.
 | `-E`, `--env`           | Optional             | The environment name to associate with the test results. This option is ignored for unit tests, code coverage tests, and static security scans. |
 | `-K`, `--sqtoken`       | Optional             | This command is a SonarQube token. Valid only if the type specified is SonarQube. Used to pull more information from the SonarQube server.      |
 | `--tags`                | Optional             | Specify a comma separated list of tags to be associated with this test result.      |
-| `--region`              | Optional             | The IBMCloud region in which the toolchain exists.                                                                      |
+| `--region`              | Optional             | The IBMCloud region of the toolchain.                                                                      |
 {: caption="Table 2. Command options for publishing a build record" caption-side="top"}
 
 #### Example
@@ -206,7 +206,7 @@ IBM Application Security on Cloud 1.0.0 is no longer published (`staticsecuritys
 | `-I`, `--toolchainid`   | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
 | `-A`, `--appurl`        | Optional             | The URL where the deployed app is running.                                                                      |
 | `-J`, `--joburl`        | Optional             | The URL to the job's build logs automatically set by the CLI in the {{site.data.keyword.deliverypipelinelong}}. |
-| `--region`              | Optional             | The IBMCloud region in which the toolchain exists.                                                              |
+| `--region`              | Optional             | The IBMCloud region of the toolchain.                                                               |
 {: caption="Table 4. Command options for publishing a deployment record" caption-side="top"}
 
 #### Example
@@ -239,7 +239,7 @@ The following are command options for evaluating gates:
 | `-I`, `--toolchainid`   | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
 | `-D`, `--forcedecision` | Optional             | Set the value to true to exit with an error code if the policy evaluation fails. The value defaults to false if this option isn't specified. |
 | `-E`, `--ruletype`      | Optional             | A rule type to consider. If you include this option, only rules of this type are considered in the decision-making process.                  |
-| `--region`              | Optional             | The IBMCloud region in which the toolchain exists.                                                       |
+| `--region`              | Optional             | The IBMCloud region of the toolchain.                                                        |
 {: caption="Table 5. Command options for evaluating gates" caption-side="top"}
 
 #### Example
@@ -269,7 +269,7 @@ The following are command options for updating custom data sets and policies:
 | `-F`, `--file`          | Required             | The location of the JSON file that contains the list of custom data sets and policies to add or update. Both absolute and relative paths are accepted. |
 | `-I`, `--toolchainid`   | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
 | `-D`, `--dryrun`        | Optional             | The option to simulate only the changes, with no updates. |
-| `--region`              | Optional             | The IBMCloud region in which the toolchain exists.                                                       |
+| `--region`              | Optional             | The IBMCloud region of the toolchain.                                                       |
 {: caption="Table 6. Command options for updating custom data sets and policies" caption-side="top"}
 
 #### Example
