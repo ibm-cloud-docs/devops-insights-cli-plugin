@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2019, 2021
-lastupdated: "2021-12-03"
+  years: 2019, 2022
+lastupdated: "2022-06-22"
 
 keywords: doi, devops insights, cli, plug-in
 
@@ -77,12 +77,15 @@ ibmcloud login --apikey API_KEY
 ### {{site.data.keyword.DRA_short}} command help
 {: #ibmcloud-command-help}
 
- The following command displays the details of flags that are needed for a command:
+The following command displays the details of the flags that are required for a command:
 
 ```text
  ibmcloud doi <command> --help
 ```
 {: codeblock}
+
+You can pass a `--region` parameter to any of the commands. By setting the value of this parameter to the `ibmcloud` region of the toolchain, the CLI does not need to determine which region the toolchain is in, making it more efficient and reliable. This parameter is optional for compatibility with earlier versions.
+{: tip}
 
 ## Commands to integrate with {{site.data.keyword.DRA_short}}
 {: #commands-integrate-insights}
@@ -97,7 +100,7 @@ The value of the `logicalappname` and `buildnumber` parameters that are passed t
 The following command publishes a build record to {{site.data.keyword.DRA_short}}:
 
 ```bash
- ibmcloud doi buildrecord-publish --branch BRANCH --repositoryurl REPOSITORYURL --commitid COMMITID --status STATUS --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--joburl JOBURL]
+ ibmcloud doi buildrecord-publish --branch BRANCH --repositoryurl REPOSITORYURL --commitid COMMITID --status STATUS --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--joburl JOBURL] [--region REGION]
 ```
 {: codeblock}
 
@@ -113,13 +116,14 @@ The following are the command options for publishing a build record.
 | `-N`, `--buildnumber`   | Required             | Any string that identifies the build.                                                                                   |
 | `-I`, `--toolchainid`   | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
 | `-J`, `--joburl`        | Optional             | The URL to the job's build logs that is automatically set by the CLI in the {{site.data.keyword.deliverypipelinelong}}. |
+| `--region`              | Optional             | The `ibmcloud` region of the toolchain.                                                                       |
 {: caption="Table 1. Command options for publishing a build record" caption-side="top"}
 
 #### Example
 {: #example1}
 
 ```bash
-ibmcloud doi buildrecord-publish  -B master -R "https://github.com/oic/dlms.git" -C dff7884b9168168d91cb9e5aec78e93db0fa80d9 -S pass -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
+ibmcloud doi buildrecord-publish  -B master -R "https://github.com/oic/dlms.git" -C dff7884b9168168d91cb9e5aec78e93db0fa80d9 -S pass -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891 --region eu-gb
 or
 ibmcloud doi buildrecord-publish  --branch master --repositoryurl "https://github.com/oic/dlms.git" --commitid dff7884b9168168d91cb9e5aec78e93db0fa80d9 --status pass --logicalappname testapp --buildnumber master:199 --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
 ```
@@ -131,7 +135,7 @@ ibmcloud doi buildrecord-publish  --branch master --repositoryurl "https://githu
  The following command publishes a test record to {{site.data.keyword.DRA_short}}:
 
 ```bash
- ibmcloud doi testrecord-publish --filelocation FILELOCATION --type TYPE --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--drilldownurl DRILLDOWNURL] [--env ENV] [--sqtoken SONARQUBE_TOKEN] 
+ ibmcloud doi testrecord-publish --filelocation FILELOCATION --type TYPE --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--drilldownurl DRILLDOWNURL] [--env ENV] [--sqtoken SONARQUBE_TOKEN] [--tags TAGS] [--region REGION]
 ```
 {: codeblock}
 
@@ -147,15 +151,17 @@ The following are the command options for publishing test records.
 | `-U`, `--drilldownurl`  | Optional             | A URL where more information about the test results can be found. If this URL is invalid, the option is ignored.                                | 
 | `-E`, `--env`           | Optional             | The environment name to associate with the test results. This option is ignored for unit tests, code coverage tests, and static security scans. |
 | `-K`, `--sqtoken`       | Optional             | This command is a SonarQube token. Valid only if the type specified is SonarQube. Used to pull more information from the SonarQube server.      |
+| `--tags`                | Optional             | Specify a comma-separated list of tags to associate with this test result.      |
+| `--region`              | Optional             | The `ibmcloud` region of the toolchain.                                                                      |
 {: caption="Table 2. Command options for publishing a build record" caption-side="top"}
 
 #### Example
 {: #example2}
 
 ```bash
-ibmcloud doi testrecord-publish -F "tests/fvt/*.json" -T fvt -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
+ibmcloud doi testrecord-publish -F "tests/fvt/*.json" -T fvt -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891 --tags "CC,app1"
 or
-ibmcloud doi testrecord-publish --filelocation "tests/fvt/*.json" --type fvt --logicalappname testapp --buildnumber master:199 --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
+ibmcloud doi testrecord-publish --filelocation "tests/fvt/*.json" --type fvt --logicalappname testapp --buildnumber master:199 --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891 --region ca-tor
 ```
 {: codeblock}
 
@@ -183,7 +189,7 @@ IBM Application Security on Cloud 1.0.0 is no longer published (`staticsecuritys
  The following command publishes a deployment record to {{site.data.keyword.DRA_short}}:
 
 ```bash
- ibmcloud doi deployrecord-publish --env ENV --status STATUS --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--joburl JOBURL] [--appurl APPURL] 
+ ibmcloud doi deployrecord-publish --env ENV --status STATUS --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--joburl JOBURL] [--appurl APPURL] [--region REGION]
 ```
 {: codeblock}
 
@@ -196,13 +202,14 @@ IBM Application Security on Cloud 1.0.0 is no longer published (`staticsecuritys
 | `-I`, `--toolchainid`   | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
 | `-A`, `--appurl`        | Optional             | The URL where the deployed app is running.                                                                      |
 | `-J`, `--joburl`        | Optional             | The URL to the job's build logs automatically set by the CLI in the {{site.data.keyword.deliverypipelinelong}}. |
+| `--region`              | Optional             | The `ibmcloud` region of the toolchain.                                                               |
 {: caption="Table 4. Command options for publishing a deployment record" caption-side="top"}
 
 #### Example
 {: #example3}
 
 ```bash
-ibmcloud doi deployrecord-publish -E "staging" -S pass -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
+ibmcloud doi deployrecord-publish -E "staging" -S pass -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891 --region au-syd
 or
 ibmcloud doi deployrecord-publish --env "staging" --status pass --logicalappname testapp --buildnumber master:199 --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
 ```
@@ -214,7 +221,7 @@ ibmcloud doi deployrecord-publish --env "staging" --status pass --logicalappname
  The following command evaluates a {{site.data.keyword.DRA_short}} gate:
 
 ```bash
- ibmcloud doi gate-evaluate --policy POLICY --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--forcedecision] [--ruletype RULETYPE] 
+ ibmcloud doi gate-evaluate --policy POLICY --logicalappname LOGICALAPPNAME --buildnumber BUILDNUMBER --toolchainid TOOLCHAINID [--forcedecision] [--ruletype RULETYPE] [--region REGION]
 ```
 {: codeblock}
 
@@ -228,13 +235,14 @@ The following are command options for evaluating gates:
 | `-I`, `--toolchainid`   | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
 | `-D`, `--forcedecision` | Optional             | Set the value to true to exit with an error code if the policy evaluation fails. The value defaults to false if this option isn't specified. |
 | `-E`, `--ruletype`      | Optional             | A rule type to consider. If you include this option, only rules of this type are considered in the decision-making process.                  |
+| `--region`              | Optional             | The `ibmcloud` region of the toolchain.                                                       |
 {: caption="Table 5. Command options for evaluating gates" caption-side="top"}
 
 #### Example
 {: #example4}
 
 ```bash
-ibmcloud doi gate-evaluate -P "policyname" -D true -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891
+ibmcloud doi gate-evaluate -P "policyname" -D true -L testapp -N master:199 -I b531487c-9c22-4f3b-9d20-5be408d57891 --region br-sao
 or
 ibmcloud doi gate-evaluate --policy "policyname" --forcedecision true --logicalappname testapp --buildnumber master:199 --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
 ```
@@ -246,7 +254,7 @@ ibmcloud doi gate-evaluate --policy "policyname" --forcedecision true --logicala
  The following command creates and updates custom data sets and policies for a toolchain:
 
 ```bash
- ibmcloud doi policies-update --file FILELOCATION --toolchainid TOOLCHAINID [--dryrun]
+ ibmcloud doi policies-update --file FILELOCATION --toolchainid TOOLCHAINID [--dryrun] [--region REGION]
 ```
 {: codeblock}
 
@@ -256,14 +264,15 @@ The following are command options for updating custom data sets and policies:
 |---------------------------------------|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
 | `-F`, `--file`          | Required             | The location of the JSON file that contains the list of custom data sets and policies to add or update. Both absolute and relative paths are accepted. |
 | `-I`, `--toolchainid`   | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
-| `-D`, `--dryrun`        | Optional             | The option to simulate only the changes, with no updates. |                 |
+| `-D`, `--dryrun`        | Optional             | The option to simulate only the changes, with no updates. |
+| `--region`              | Optional             | The `ibmcloud` region of the toolchain.                                                       |
 {: caption="Table 6. Command options for updating custom data sets and policies" caption-side="top"}
 
 #### Example
 {: #example5}
 
 ```bash
-ibmcloud doi policies-update -F "policies/policy.json" -I b531487c-9c22-4f3b-9d20-5be408d57891
+ibmcloud doi policies-update -F "policies/policy.json" -I b531487c-9c22-4f3b-9d20-5be408d57891 --region jp-tok
 or
 ibmcloud doi policies-update --file "policies/policy.json" --toolchainid b531487c-9c22-4f3b-9d20-5be408d57891
 ```
