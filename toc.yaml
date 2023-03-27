@@ -2,8 +2,6 @@
 toc:
   properties:
     subcollection: devops-insights-cli-plugin
-    version: 2
-    category: platform_services
     audience: platform
     href: /docs/devops-insights-cli-plugin
     console-page: /devops/getting-started
