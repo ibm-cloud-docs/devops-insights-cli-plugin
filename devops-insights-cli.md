@@ -278,8 +278,8 @@ A valid JSON file structure contains two fields:
 
 ```bash
 {
-      "custom_datasets": [],
-      "policies": []
+      "custom_datasets": [],
+      "policies": []
 }
 ```
 {: codeblock}
@@ -300,105 +300,105 @@ This sample JSON file contains two custom data sets and two policies. The first 
 
 ```bash
 {
-  "custom_datasets": [
- .  {
-      "lifecycle_stage": "integrationtest",
-      "type_of_test": "test",
-      "label": "Integration Test"
-    },
-    {
-      "lifecycle_stage": "covtest",
-      "type_of_test": "code",
-      "label": "Coverage Test"
-    }
-  ],
-  "policies": [
-    {
-      "name": "Orders",
-      "description": "Composite Policy.",
-      "rules": [
-        {
-          "name": "rule1",
- .        "description": "Unit Test Rule with regression",
-          "stage": "unittest",
-          "percentPass": 100,
-          "criticalTests": [
-            "Get Weather with incomplete zip code"
-          ],
-          "regressionCheck": true
-        },
-        {
-          "name": "rule2",
-          "description": "Unit Test Rule without regression",
-          "stage": "integrationtest",
-          "percentPass": 98,
-          "criticalTests": [
-            "'Get Weather with incomplete zip code'"
-          ],
-        },
-        {
-          "name": "rule3",
-          "description": "Functional test Rule",
-          "stage": "fvt",
-          "percentPass": 98,
-          "criticalTests": [
-            "'Get Weather with incomplete zip code'"
-          ],
-        },
-        {
-          "name": "rule4",
-          "description": "Code Coverage rule",
-          "stage": "code",
-          "codeCoverage": 98,
-        },
-        {
-          "name": "rule5",
-          "description": "Custom dataset rule",
-          "stage": "covtest",
-          "codeCoverage": 60,
-        },
-        {
-          "name": "rule6",
-          "description": "Static Security Scan rule",
-          "stage": "staticsecurityscan",
-          "highSeverity": 40,
-          "mediumSeverity": 5,
-          "lowSeverity": 9
-        },
-        {
-          "name": "rule7",
-         "description": "Dynamic Security Scan rule",
-          "stage": "dynamicsecurityscan",
-          "highSeverity": 40,
-          "mediumSeverity": 5,
-          "lowSeverity": 9
-        },
-        {
-          "name": "rule8",
-          "description": "Sonarqube rule",
-          "stage": "sonarqube"
-        },
-        {
-          "name": "rule9",
-          "description": "Vulnerability rule",
-          "stage": "vulnerabilityadvisor"
-        }
-      ]
-    },
-    {
-      "name": "UI",
-      "description": "Policy to check Unit Test.",
-      "rules": [
-        {
-          "name": "Unit Test Rule",
-          "description": "Unit Test Rule",
-          "stage": "integrationtest",
-          "percentPass": 100,
-          "criticalTests": []
-        }
-      ]
-    }
-  ]
+  "custom_datasets": [
+ .  {
+      "lifecycle_stage": "integrationtest",
+      "type_of_test": "test",
+      "label": "Integration Test"
+    },
+    {
+      "lifecycle_stage": "covtest",
+      "type_of_test": "code",
+      "label": "Coverage Test"
+    }
+  ],
+  "policies": [
+    {
+      "name": "Orders",
+      "description": "Composite Policy.",
+      "rules": [
+        {
+          "name": "rule1",
+ .        "description": "Unit Test Rule with regression",
+          "stage": "unittest",
+          "percentPass": 100,
+          "criticalTests": [
+            "Get Weather with incomplete zip code"
+          ],
+          "regressionCheck": true
+        },
+        {
+          "name": "rule2",
+          "description": "Unit Test Rule without regression",
+          "stage": "integrationtest",
+          "percentPass": 98,
+          "criticalTests": [
+            "'Get Weather with incomplete zip code'"
+          ],
+        },
+        {
+          "name": "rule3",
+          "description": "Functional test Rule",
+          "stage": "fvt",
+          "percentPass": 98,
+          "criticalTests": [
+            "'Get Weather with incomplete zip code'"
+          ],
+        },
+        {
+          "name": "rule4",
+          "description": "Code Coverage rule",
+          "stage": "code",
+          "codeCoverage": 98,
+        },
+        {
+          "name": "rule5",
+          "description": "Custom dataset rule",
+          "stage": "covtest",
+          "codeCoverage": 60,
+        },
+        {
+          "name": "rule6",
+          "description": "Static Security Scan rule",
+          "stage": "staticsecurityscan",
+          "highSeverity": 40,
+          "mediumSeverity": 5,
+          "lowSeverity": 9
+        },
+        {
+          "name": "rule7",
+         "description": "Dynamic Security Scan rule",
+          "stage": "dynamicsecurityscan",
+          "highSeverity": 40,
+          "mediumSeverity": 5,
+          "lowSeverity": 9
+        },
+        {
+          "name": "rule8",
+          "description": "Sonarqube rule",
+          "stage": "sonarqube"
+        },
+        {
+          "name": "rule9",
+          "description": "Vulnerability rule",
+          "stage": "vulnerabilityadvisor"
+        }
+      ]
+    },
+    {
+      "name": "UI",
+      "description": "Policy to check Unit Test.",
+      "rules": [
+        {
+          "name": "Unit Test Rule",
+          "description": "Unit Test Rule",
+          "stage": "integrationtest",
+          "percentPass": 100,
+          "criticalTests": []
+        }
+      ]
+    }
+  ]
 }
 ```
 {: codeblock}

@@ -8,7 +8,6 @@ toc:
     product-page: https://www.ibm.com/cloud/continuous-delivery
     path: devops-insights-cli-plugin
     label: IBM Cloud DevOps Insights CLI
-
   entries: 
   - navgroup: 
       id: reference
