@@ -1,7 +1,7 @@
 ---
 
 copyright:
-  years: 2019, 2022
+  years: 2019, 2024
 lastupdated: "2022-11-17"
 
 keywords: doi, devops insights, cli, plug-in
@@ -31,7 +31,7 @@ ibmcloud plugin install doi
 ```
 {: codeblock}
 
-* Make sure you can access a toolchain with the {{site.data.keyword.DRA_short}} tool that is configured for that toolchain. For more information about toolchains, see [Creating a toolchain from an app](/docs/ContinuousDelivery?topic=ContinuousDelivery-toolchains_getting_started#creating_a_toolchain_from_an_app).  
+* Make sure you can access a toolchain with the {{site.data.keyword.DRA_short}} tool that is configured for that toolchain. For more information about toolchains, see [Creating a toolchain from an app](/docs/ContinuousDelivery?topic=ContinuousDelivery-toolchains_getting_started#creating_a_toolchain_from_an_app).
 
 * Specify the toolchain ID by using one of the following methods:
    - Specify the toolchain ID as a CLI parameter to the command.
@@ -82,7 +82,7 @@ You can pass a `--region` parameter to any of the commands. By setting the value
 ## Commands to integrate with {{site.data.keyword.DRA_short}}
 {: #commands-integrate-insights}
 
-When you use the CLI for a build, you must publish a [build record](#publishbuildrecord). 
+When you use the CLI for a build, you must publish a [build record](#publishbuildrecord).
 
 The value of the `logicalappname` and `buildnumber` parameters that are passed to the CLI must remain the same across all of the command invocations.
 
@@ -96,11 +96,11 @@ The following command publishes a build record to {{site.data.keyword.DRA_short}
 ```
 {: codeblock}
 
-The following are the command options for publishing a build record. 
+The following are the command options for publishing a build record.
 
 | Command Options                       | Required or Optional | Description                                                                                                             |
 |---------------------------------------|----------------------|-------------------------------------------------------------------------------------------------------------------------|
-| `-B`, `--branch`        | Required             | The repository branch that the build is being performed.                                                                | 
+| `-B`, `--branch`        | Required             | The repository branch that the build is being performed.                                                                |
 | `-R`, `--repositoryurl` | Required             | The URL of the Git repository.                                                                                          |
 | `-C`, `--commitid`      | Required             | The Git commit ID.                                                                                                      |
 | `-S`, `--status`        | Required             | The build status. Acceptable values: `pass` and `fail`.                                                                 |
@@ -131,7 +131,7 @@ ibmcloud doi buildrecord-publish  --branch master --repositoryurl "https://githu
 ```
 {: codeblock}
 
-The following are the command options for publishing test records. 
+The following are the command options for publishing test records.
 
 | Command Options                       | Required or Optional | Description                                                                                                                                     |
 |---------------------------------------|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -140,7 +140,7 @@ The following are the command options for publishing test records.
 | `-L`, `--logicalappname`| Required             | Name of the application.                                                                                                                        |
 | `-N`, `--buildnumber`   | Required             | Any string that identifies the build.                                                                                                           |
 | `-I`, `--toolchainid`   | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
-| `-U`, `--drilldownurl`  | Optional             | A URL where more information about the test results can be found. If this URL is invalid, the option is ignored.                                | 
+| `-U`, `--drilldownurl`  | Optional             | A URL where more information about the test results can be found. If this URL is invalid, the option is ignored.                                |
 | `-E`, `--env`           | Optional             | The environment name to associate with the test results. This option is ignored for unit tests, code coverage tests, and static security scans. |
 | `-K`, `--sqtoken`       | Optional             | This command is a SonarQube token. Valid only if the type specified is SonarQube. Used to pull more information from the SonarQube server.      |
 | `--tags`                | Optional             | Specify a comma-separated list of tags to associate with this test result.      |
@@ -208,7 +208,7 @@ ibmcloud doi deployrecord-publish --env "staging" --status pass --logicalappname
 ```
 {: codeblock}
 
-### Evaluating gates 
+### Evaluating gates
 {: #evaluategate}
 
  The following command evaluates a {{site.data.keyword.DRA_short}} gate:
@@ -407,25 +407,25 @@ This sample JSON file contains two custom data sets and two policies. The first 
 {: #faq}
 
 Get answers to frequently asked questions about using the {{site.data.keyword.DRA_short}} CLI.
- 
+
 ### Why does the CLI fail with the "You do not have access to the toolchain" message?
 {: #faq-no-toolchain-access}
-  
+
 The `API_KEY` environment variable that is used to log in to {{site.data.keyword.cloud_notm}} must be able to access the toolchain. Also, verify that you added the {{site.data.keyword.DRA_short}} tool integration to your toolchain.
 
 ### The CLI successfully ran, why doesn't the data show up on the dashboard?
 {: #faq-no-data-dashboard}
- 
+
 Make sure that the value of the `logicalappname` and `buildnumber` parameters that are passed to the CLI are the same across all of the stages for the build. Also, verify that a build record is uploaded for the build. The data for test records that are uploaded for a specific build does not appear on the dashboard without a build record.
 
 ### How can I determine why the CLI failed?
 {: #faq-cli-debug}
- 
+
 Before you call the {{site.data.keyword.DRA_short}} CLI, set the `IBMCLOUD_TRACE` environment variable to true to turn on the debug log.
-      
+
 ```bash
     export IBMCLOUD_TRACE=true
 ```
 {: codeblock}
-      
+
 Observe the API calls and the responses that are shown in the log to determine the exact reason for failure.
