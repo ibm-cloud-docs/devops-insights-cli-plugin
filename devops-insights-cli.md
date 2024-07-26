@@ -173,7 +173,7 @@ The following test types are supported:
 | `zapscan` | OWASP Zed Attack Proxy (ZAP) scan reports |
 {: caption="Table 3. Test record types" caption-side="top"}
 
-IBM Application Security on Cloud 1.0.0 is no longer published (`staticsecurityscan` and `dynamicsecurityscan` test types). All IBM Application Security on Cloud 1.0.0 support is provided by HCL. For more information, see the [HCL AppScan documentation](https://help.hcltechsw.com/appscan/Welcome.html){: external}.
+IBM Application Security on Cloud 1.0.0 is no longer published (`staticsecurityscan` and `dynamicsecurityscan` test types). All IBM Application Security on Cloud 1.0.0 support is provided by HCL. For more information, see the [HCL AppScan documentation](https://help.hcl-software.com/appscan/Welcome.html){: external}.
 {: note}
 
 ### Publishing a deployment record
