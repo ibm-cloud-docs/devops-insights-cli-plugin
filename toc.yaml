@@ -7,9 +7,10 @@ toc:
     console-page: /devops/getting-started
     product-page: https://www.ibm.com/cloud/continuous-delivery
     path: devops-insights-cli-plugin
+    navigation: hidden
     label: IBM Cloud DevOps Insights CLI
-  entries: 
-  - navgroup: 
+  entries:
+  - navgroup:
       id: reference
       topics:
       - devops-insights-cli.md
