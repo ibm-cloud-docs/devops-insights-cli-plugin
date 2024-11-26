@@ -31,14 +31,14 @@ ibmcloud plugin install doi
 ```
 {: codeblock}
 
-* Make sure you can access a toolchain with the {{site.data.keyword.DRA_short}} tool that is configured for that toolchain. For more information about toolchains, see [Creating a toolchain from an app](/docs/ContinuousDelivery?topic=ContinuousDelivery-toolchains_getting_started#creating_a_toolchain_from_an_app).
+* Make sure you can access a toolchain with the {{site.data.keyword.DRA_short}} tool that is configured for that toolchain. For more information about toolchains, see [Creating a toolchain from an app](/docs/ContinuousDelivery?topic=ContinuousDelivery-toolchains_getting_started&interface=ui#creating_a_toolchain_from_an_app).
 
 * Specify the toolchain ID by using one of the following methods:
    - Specify the toolchain ID as a CLI parameter to the command.
    - Set the `TOOLCHAIN_ID` environment variable.
    - Your {{site.data.keyword.contdelivery_full}} pipeline might automatically set the `PIPELINE_TOOLCHAIN_ID` environment variable.
 
-   The CLI needs the value of the toolchain ID. The value of toolchain ID that is specified in the CLI parameter overrides the value of environment variable.
+   The CLI needs the value of the toolchain ID. The value of toolchain ID that is specified in the CLI parameter overrides the value of the environment variable.
 
    The toolchain ID is found in the toolchain URL that is shown in the browser. If you're using {{site.data.keyword.deliverypipelinelong}}, you can set the toolchain ID to send your build data to a different toolchain. For more information, see [Aggregating data from multiple sources into a single toolchain](/docs/ContinuousDelivery?topic=ContinuousDelivery-aggregating-multiple-sources).
 
@@ -285,7 +285,7 @@ A valid JSON file structure contains two fields:
 {: codeblock}
 
 * You can specify any number of policies (and custom data sets) for the array.
-* If the specified policy (and custom data set) already exists for a toolchain, the policy is updated or created.
+* If the specified policy (and custom data set) exists for a toolchain, the policy is updated or created.
 * Either the `custom_datasets` or `policies` array can be empty, or both can be empty.
 * The only valid values for a `type_of_test` custom data set are `test` and `code`.
 * If a custom data set exists for a toolchain, it can be used in the policy rules that are defined within the JSON file. You are not always required to define the custom data set within the JSON file.
