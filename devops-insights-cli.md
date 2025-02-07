@@ -31,7 +31,7 @@ ibmcloud plugin install doi
 ```
 {: codeblock}
 
-* Make sure you can access a toolchain with the {{site.data.keyword.DRA_short}} tool that is configured for that toolchain. For more information about toolchains, see [Creating a toolchain from an app](/docs/ContinuousDelivery?topic=ContinuousDelivery-toolchains_getting_started&interface=ui#creating_a_toolchain_from_an_app).
+* Make sure that you can access a toolchain with the {{site.data.keyword.DRA_short}} tool that is configured for that toolchain. For more information about toolchains, see [Creating a toolchain from an app](/docs/ContinuousDelivery?topic=ContinuousDelivery-toolchains_getting_started&interface=ui#creating_a_toolchain_from_an_app).
 
 * Specify the toolchain ID by using one of the following methods:
    - Specify the toolchain ID as a CLI parameter to the command.
@@ -84,7 +84,7 @@ You can pass a `--region` parameter to any of the commands. By setting the value
 
 When you use the CLI for a build, you must publish a [build record](#publishbuildrecord).
 
-The value of the `logicalappname` and `buildnumber` parameters that are passed to the CLI must remain the same across all of the command invocations.
+The value of the `logicalappname` and `buildnumber` parameters that are passed to the CLI must remain the same across all command invocations.
 
 ### Publishing a build record
 {: #publishbuildrecord}
@@ -284,7 +284,7 @@ A valid JSON file structure contains two fields:
 ```
 {: codeblock}
 
-* You can specify any number of policies (and custom data sets) for the array.
+* You can specify any number of policies (and custom datasets) for the array.
 * If the specified policy (and custom data set) exists for a toolchain, the policy is updated or created.
 * Either the `custom_datasets` or `policies` array can be empty, or both can be empty.
 * The only valid values for a `type_of_test` custom data set are `test` and `code`.
@@ -296,7 +296,7 @@ A valid JSON file structure contains two fields:
 #### Sample JSON file for the `policies-update` command
 {: #sample-policies-update}
 
-This sample JSON file contains two custom data sets and two policies. The first policy, `name: "Orders"`, contains all of the rule types that you can use within a policy.
+This sample JSON file contains two custom datasets and two policies. The first policy `name: "Orders"` contains all of the rule types that you can use within a policy.
 
 ```bash
 {
