@@ -15,7 +15,7 @@ subcollection: devops-insights-cli-plugin
 # {{site.data.keyword.DRA_short}} CLI
 {: #CLI_devops-insights}
 
-The {{site.data.keyword.DRA_full}} CLI provides a set of commands that you can use to integrate your build with {{site.data.keyword.DRA_short}}. You must use two different types of commands: CLI usage commands and CLI commands to integrate with {{site.data.keyword.DRA_short}}.
+The {{site.data.keyword.DRA_full}} CLI provides a set of commands that you can use to integrate your build with {{site.data.keyword.DRA_short}}. Use two different types of commands: CLI usage commands and CLI commands to integrate with {{site.data.keyword.DRA_short}}.
 {: shortdesc}
 
 
@@ -38,7 +38,7 @@ ibmcloud plugin install doi
    - Set the `TOOLCHAIN_ID` environment variable.
    - Your {{site.data.keyword.contdelivery_full}} pipeline might automatically set the `PIPELINE_TOOLCHAIN_ID` environment variable.
 
-   The CLI needs the value of the toolchain ID. The value of toolchain ID that is specified in the CLI parameter overrides the value of the environment variable.
+   The CLI needs the value of the toolchain ID. The value of the toolchain ID that is specified in the CLI parameter overrides the value of the environment variable.
 
    The toolchain ID is found in the toolchain URL that is shown in the browser. If you're using {{site.data.keyword.deliverypipelinelong}}, you can set the toolchain ID to send your build data to a different toolchain. For more information, see [Aggregating data from multiple sources into a single toolchain](/docs/ContinuousDelivery?topic=ContinuousDelivery-aggregating-multiple-sources).
 
