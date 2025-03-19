@@ -15,7 +15,7 @@ subcollection: devops-insights-cli-plugin
 # {{site.data.keyword.DRA_short}} CLI
 {: #CLI_devops-insights}
 
-The {{site.data.keyword.DRA_full}} CLI provides a set of commands that you can use to integrate your build with {{site.data.keyword.DRA_short}}. You must use two different types of commands: CLI usage commands and CLI commands to integrate with {{site.data.keyword.DRA_short}}.
+The {{site.data.keyword.DRA_full}} CLI provides a set of commands that you can use to integrate your build with {{site.data.keyword.DRA_short}}. Use two different types of commands: CLI usage commands and CLI commands to integrate with {{site.data.keyword.DRA_short}}.
 {: shortdesc}
 
 
@@ -31,14 +31,14 @@ ibmcloud plugin install doi
 ```
 {: codeblock}
 
-* Make sure you can access a toolchain with the {{site.data.keyword.DRA_short}} tool that is configured for that toolchain. For more information about toolchains, see [Creating a toolchain from an app](/docs/ContinuousDelivery?topic=ContinuousDelivery-toolchains_getting_started#creating_a_toolchain_from_an_app).
+* Make sure that you can access a toolchain with the {{site.data.keyword.DRA_short}} tool that is configured for that toolchain. For more information about toolchains, see [Creating a toolchain from an app](/docs/ContinuousDelivery?topic=ContinuousDelivery-toolchains_getting_started&interface=ui#creating_a_toolchain_from_an_app).
 
 * Specify the toolchain ID by using one of the following methods:
    - Specify the toolchain ID as a CLI parameter to the command.
    - Set the `TOOLCHAIN_ID` environment variable.
    - Your {{site.data.keyword.contdelivery_full}} pipeline might automatically set the `PIPELINE_TOOLCHAIN_ID` environment variable.
 
-   The CLI needs the value of the toolchain ID. The value of toolchain ID that is specified in the CLI parameter overrides the value of environment variable.
+   The CLI needs the value of the toolchain ID. The value of the toolchain ID that is specified in the CLI parameter overrides the value of the environment variable.
 
    The toolchain ID is found in the toolchain URL that is shown in the browser. If you're using {{site.data.keyword.deliverypipelinelong}}, you can set the toolchain ID to send your build data to a different toolchain. For more information, see [Aggregating data from multiple sources into a single toolchain](/docs/ContinuousDelivery?topic=ContinuousDelivery-aggregating-multiple-sources).
 
@@ -52,6 +52,19 @@ Use this command to log in to {{site.data.keyword.cloud_notm}}. The API_KEY must
 ibmcloud login --apikey API_KEY
 ```
 {: codeblock}
+
+## Log in to the CLI with a private endpoint
+{: #login-cli-private-endpoint}
+
+For enhanced control and security over your data when using CLI, you have the option of using private routes to {{site.data.keyword.cloud_notm}} endpoints. You must first enable virtual routing and forwarding in your account, and then you can enable the use of {{site.data.keyword.cloud_notm}} private service endpoints. For more information about setting up your account to support the private connectivity option, see [Enabling VRF and service endpoints](https://cloud.ibm.com/docs/account?topic=account-vrf-service-endpoint&interface=ui).
+
+Use the following command to log in to a private endpoint by using the CLI. The API_KEY must have access to the toolchain.
+
+```text
+ibmcloud login -a private.cloud.ibm.com --apikey API_KEY
+```
+{: codeblock}
+
 
 ## CLI usage commands
 {: #CLI-usage-commands}
@@ -84,7 +97,7 @@ You can pass a `--region` parameter to any of the commands. By setting the value
 
 When you use the CLI for a build, you must publish a [build record](#publishbuildrecord).
 
-The value of the `logicalappname` and `buildnumber` parameters that are passed to the CLI must remain the same across all of the command invocations.
+The value of the `logicalappname` and `buildnumber` parameters that are passed to the CLI must remain the same across all command invocations.
 
 ### Publishing a build record
 {: #publishbuildrecord}
@@ -108,8 +121,8 @@ The following are the command options for publishing a build record.
 | `-N`, `--buildnumber`   | Required             | Any string that identifies the build.                                                                                   |
 | `-I`, `--toolchainid`   | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
 | `-J`, `--joburl`        | Optional             | The URL to the job's build logs that is automatically set by the CLI in the {{site.data.keyword.deliverypipelinelong}}. |
-| `--region`              | Optional             | The `ibmcloud` region of the toolchain.                                                                       |
-{: caption="Table 1. Command options for publishing a build record" caption-side="top"}
+| `--region`              | Required             | The `ibmcloud` region of the toolchain. This value is required when using private endpoints. It is optional but good to have in case of public endpoints. |
+{: caption="Command options for publishing a build record" caption-side="top"}
 
 #### Example
 {: #example1}
@@ -144,8 +157,8 @@ The following are the command options for publishing test records.
 | `-E`, `--env`           | Optional             | The environment name to associate with the test results. This option is ignored for unit tests, code coverage tests, and static security scans. |
 | `-K`, `--sqtoken`       | Optional             | This command is a SonarQube token. Valid only if the type specified is SonarQube. Used to pull more information from the SonarQube server.      |
 | `--tags`                | Optional             | Specify a comma-separated list of tags to associate with this test result.      |
-| `--region`              | Optional             | The `ibmcloud` region of the toolchain.                                                                      |
-{: caption="Table 2. Command options for publishing a build record" caption-side="top"}
+| `--region`              | Required             | The `ibmcloud` region of the toolchain. This value is required when using private endpoints. It is optional but good to have in case of public endpoints.|
+{: caption="Command options for publishing a build record" caption-side="top"}
 
 #### Example
 {: #example2}
@@ -171,7 +184,7 @@ The following test types are supported:
 | `cradeploy` | Deployment report generated by Code Risk Analyzer |
 | `cracve` | Vulnerability report generated by Code Risk Analyzer |
 | `zapscan` | OWASP Zed Attack Proxy (ZAP) scan reports |
-{: caption="Table 3. Test record types" caption-side="top"}
+{: caption="Test record types" caption-side="top"}
 
 IBM Application Security on Cloud 1.0.0 is no longer published (`staticsecurityscan` and `dynamicsecurityscan` test types). All IBM Application Security on Cloud 1.0.0 support is provided by HCL. For more information, see the [HCL AppScan documentation](https://help.hcl-software.com/appscan/Welcome.html){: external}.
 {: note}
@@ -195,8 +208,8 @@ IBM Application Security on Cloud 1.0.0 is no longer published (`staticsecuritys
 | `-I`, `--toolchainid`   | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
 | `-A`, `--appurl`        | Optional             | The URL where the deployed app is running.                                                                      |
 | `-J`, `--joburl`        | Optional             | The URL to the job's build logs automatically set by the CLI in the {{site.data.keyword.deliverypipelinelong}}. |
-| `--region`              | Optional             | The `ibmcloud` region of the toolchain.                                                               |
-{: caption="Table 4. Command options for publishing a deployment record" caption-side="top"}
+| `--region`              | Required            | The `ibmcloud` region of the toolchain. This value is required when using private endpoints. It is optional but good to have in case of public endpoints.|
+{: caption="Command options for publishing a deployment record" caption-side="top"}
 
 #### Example
 {: #example3}
@@ -228,8 +241,8 @@ The following are command options for evaluating gates:
 | `-I`, `--toolchainid`   | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
 | `-D`, `--forcedecision` | Optional             | Set the value to true to exit with an error code if the policy evaluation fails. The value defaults to false if this option isn't specified. |
 | `-E`, `--ruletype`      | Optional             | A rule type to consider. If you include this option, only rules of this type are considered in the decision-making process.                  |
-| `--region`              | Optional             | The `ibmcloud` region of the toolchain.                                                       |
-{: caption="Table 5. Command options for evaluating gates" caption-side="top"}
+| `--region`              | Required             | The `ibmcloud` region of the toolchain. This value is required when using private endpoints. It is optional but good to have in case of public endpoints. |
+{: caption="Command options for evaluating gates" caption-side="top"}
 
 #### Example
 {: #example4}
@@ -258,8 +271,8 @@ The following are command options for updating custom data sets and policies:
 | `-F`, `--file`          | Required             | The location of the JSON file that contains the list of custom data sets and policies to add or update. Both absolute and relative paths are accepted. |
 | `-I`, `--toolchainid`   | Required             | If the TOOLCHAIN_ID environment variable is set, this flag is optional. If both the environment variable and the flag are provided, the value of the flag overrides the value of the environment variable. |
 | `-D`, `--dryrun`        | Optional             | The option to simulate only the changes, with no updates. |
-| `--region`              | Optional             | The `ibmcloud` region of the toolchain.                                                       |
-{: caption="Table 6. Command options for updating custom data sets and policies" caption-side="top"}
+| `--region`              | Required             | The `ibmcloud` region of the toolchain. This value is required when using private endpoints. It is optional but good to have in case of public endpoints. |
+{: caption="Command options for updating custom data sets and policies" caption-side="top"}
 
 #### Example
 {: #example5}
@@ -284,8 +297,8 @@ A valid JSON file structure contains two fields:
 ```
 {: codeblock}
 
-* You can specify any number of policies (and custom data sets) for the array.
-* If the specified policy (and custom data set) already exists for a toolchain, the policy is updated or created.
+* You can specify any number of policies (and custom datasets) for the array.
+* If the specified policy (and custom data set) exists for a toolchain, the policy is updated or created.
 * Either the `custom_datasets` or `policies` array can be empty, or both can be empty.
 * The only valid values for a `type_of_test` custom data set are `test` and `code`.
 * If a custom data set exists for a toolchain, it can be used in the policy rules that are defined within the JSON file. You are not always required to define the custom data set within the JSON file.
@@ -296,7 +309,7 @@ A valid JSON file structure contains two fields:
 #### Sample JSON file for the `policies-update` command
 {: #sample-policies-update}
 
-This sample JSON file contains two custom data sets and two policies. The first policy, `name: "Orders"`, contains all of the rule types that you can use within a policy.
+This sample JSON file contains two custom datasets and two policies. The first policy `name: "Orders"` contains all of the rule types that you can use within a policy.
 
 ```bash
 {
@@ -417,6 +430,15 @@ The `API_KEY` environment variable that is used to log in to {{site.data.keyword
 {: #faq-no-data-dashboard}
 
 Make sure that the value of the `logicalappname` and `buildnumber` parameters that are passed to the CLI are the same across all of the stages for the build. Also, verify that a build record is uploaded for the build. The data for test records that are uploaded for a specific build does not appear on the dashboard without a build record.
+
+### The CLI times out communicating with the Sonarqube server, is there a way to increase the timeout period
+{: #faq-cli-timeout-period}
+The default timeout period is 60 seconds.
+Before you call the {{site.data.keyword.DRA_short}} CLI, set the `IBMCLOUD_HTTP_TIMEOUT` environment variable. Its value is number of seconds.
+```bash
+    export IBMCLOUD_HTTP_TIMEOUT=120
+```
+{: codeblock}
 
 ### How can I determine why the CLI failed?
 {: #faq-cli-debug}
